@@ -1,0 +1,2805 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>سَوقلي | منصة التسويق الذكي للمشاريع</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet"/>
+<style>
+/* ============================================================
+   VARIABLES & RESET
+   ============================================================ */
+:root{
+  --brown:#3E2723;
+  --brown2:#5D4037;
+  --brown3:#6D4C41;
+  --gold:#C8A97E;
+  --gold2:#E8C99A;
+  --cream:#F5F1EC;
+  --cream2:#EDE8E1;
+  --white:#FFFFFF;
+  --shadow:0 4px 20px rgba(62,39,35,.10);
+  --shadow2:0 8px 40px rgba(62,39,35,.18);
+  --radius:16px;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Cairo',sans-serif;background:var(--cream);color:var(--brown);overflow-x:hidden;}
+a{text-decoration:none;color:inherit;}
+
+/* ============================================================
+   SCROLLBAR
+   ============================================================ */
+::-webkit-scrollbar{width:6px;}
+::-webkit-scrollbar-track{background:var(--cream2);}
+::-webkit-scrollbar-thumb{background:var(--gold);border-radius:3px;}
+
+/* ============================================================
+   PAGES SYSTEM
+   ============================================================ */
+.page{display:none;}
+.page.active{display:block;} #page-dashboard.active{display:flex;}
+
+/* ============================================================
+   NAV
+   ============================================================ */
+#main-nav{
+  position:fixed;top:0;right:0;left:0;z-index:200;
+  background:rgba(245,241,236,.92);backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(200,169,126,.2);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 clamp(16px,4vw,64px);height:62px;
+}
+.nav-logo{font-size:22px;font-weight:900;color:var(--brown);cursor:pointer;letter-spacing:-0.5px;}
+.nav-logo span{color:var(--gold);}
+.nav-links{display:flex;gap:8px;align-items:center;}
+.nav-link{padding:7px 16px;border-radius:20px;font-size:13px;font-weight:700;cursor:pointer;transition:all .2s;}
+.nav-link:hover{background:rgba(200,169,126,.15);}
+.nav-btn{background:linear-gradient(135deg,var(--brown),var(--brown2));color:white;padding:8px 20px;border-radius:20px;font-size:13px;font-weight:800;cursor:pointer;border:none;font-family:'Cairo',sans-serif;transition:all .2s;}
+.nav-btn:hover{transform:scale(1.04);box-shadow:var(--shadow);}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero{
+  min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;
+  text-align:center;padding:80px clamp(16px,5vw,80px) 40px;
+  background:radial-gradient(ellipse 80% 60% at 50% 0%, rgba(200,169,126,.18) 0%, transparent 70%),
+             radial-gradient(ellipse 40% 40% at 80% 80%, rgba(62,39,35,.06) 0%, transparent 70%),
+             var(--cream);
+  position:relative;overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c8a97e' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  pointer-events:none;
+}
+.hero-tag{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(200,169,126,.15);border:1px solid rgba(200,169,126,.3);
+  padding:6px 18px;border-radius:20px;font-size:13px;font-weight:700;color:var(--brown2);
+  margin-bottom:24px;animation:fadeDown .6s ease both;
+}
+.hero-h1{
+  font-size:clamp(36px,6vw,72px);font-weight:900;color:var(--brown);line-height:1.1;
+  margin-bottom:20px;animation:fadeDown .7s .1s ease both;
+}
+.hero-h1 span{
+  background:linear-gradient(135deg,var(--gold),var(--brown));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.hero-sub{
+  font-size:clamp(14px,1.8vw,18px);color:var(--brown3);line-height:1.8;
+  max-width:600px;margin:0 auto 36px;animation:fadeDown .7s .2s ease both;
+}
+.hero-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;animation:fadeDown .7s .3s ease both;}
+.btn-primary{
+  padding:14px 36px;border-radius:28px;
+  background:linear-gradient(135deg,var(--brown),var(--brown2));
+  color:white;font-size:15px;font-weight:800;cursor:pointer;border:none;
+  font-family:'Cairo',sans-serif;transition:all .25s;box-shadow:0 4px 20px rgba(62,39,35,.25);
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(62,39,35,.35);}
+.btn-secondary{
+  padding:14px 32px;border-radius:28px;
+  background:transparent;border:2px solid rgba(200,169,126,.5);
+  color:var(--brown);font-size:15px;font-weight:800;cursor:pointer;
+  font-family:'Cairo',sans-serif;transition:all .25s;
+}
+.btn-secondary:hover{background:rgba(200,169,126,.1);border-color:var(--gold);}
+.hero-stats{
+  display:flex;gap:40px;justify-content:center;flex-wrap:wrap;
+  margin-top:56px;animation:fadeDown .7s .4s ease both;
+}
+.stat{text-align:center;}
+.stat-num{font-size:28px;font-weight:900;color:var(--brown);}
+.stat-num span{color:var(--gold);}
+.stat-lbl{font-size:12px;color:var(--brown3);}
+
+/* ============================================================
+   SECTION
+   ============================================================ */
+.section{padding:clamp(48px,8vw,96px) clamp(16px,5vw,80px);}
+.section-alt{background:var(--cream2);}
+.sec-head{text-align:center;margin-bottom:clamp(32px,5vw,56px);}
+.sec-tag{
+  display:inline-block;padding:5px 16px;border-radius:14px;
+  background:rgba(200,169,126,.15);color:var(--gold);font-size:12px;font-weight:700;
+  margin-bottom:14px;border:1px solid rgba(200,169,126,.25);
+}
+.sec-title{font-size:clamp(22px,3.5vw,38px);font-weight:900;color:var(--brown);margin-bottom:10px;}
+.sec-sub{font-size:15px;color:var(--brown3);line-height:1.8;}
+.gold-line{width:50px;height:3px;background:linear-gradient(90deg,var(--gold),transparent);margin:16px auto 0;border-radius:2px;}
+
+/* ============================================================
+   HOW IT WORKS — مسار المستخدم
+   ============================================================ */
+.flow-steps{display:flex;gap:0;justify-content:center;flex-wrap:wrap;position:relative;max-width:900px;margin:0 auto;}
+.flow-step{
+  flex:1;min-width:150px;max-width:200px;text-align:center;padding:0 16px;position:relative;
+}
+.flow-step:not(:last-child)::after{
+  content:'←';position:absolute;left:-10px;top:30px;font-size:22px;color:var(--gold);opacity:.5;
+}
+.step-num{
+  width:60px;height:60px;border-radius:50%;
+  background:linear-gradient(135deg,var(--brown),var(--brown2));
+  color:white;font-size:20px;font-weight:900;display:flex;align-items:center;justify-content:center;
+  margin:0 auto 14px;box-shadow:0 4px 16px rgba(62,39,35,.2);
+}
+.step-name{font-size:14px;font-weight:800;color:var(--brown);margin-bottom:6px;}
+.step-desc{font-size:12px;color:var(--brown3);line-height:1.7;}
+
+/* ============================================================
+   DOMAINS GRID
+   ============================================================ */
+.domains-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:16px;
+  max-width:900px;margin:0 auto;
+}
+.domain-card{
+  background:var(--white);border-radius:var(--radius);padding:24px 16px;text-align:center;
+  border:1.5px solid rgba(200,169,126,.15);cursor:pointer;transition:all .25s;
+  box-shadow:var(--shadow);
+}
+.domain-card:hover,.domain-card.selected{
+  border-color:var(--gold);transform:translateY(-4px);
+  box-shadow:0 12px 32px rgba(200,169,126,.25);background:rgba(200,169,126,.05);
+}
+.domain-ico{font-size:36px;margin-bottom:10px;}
+.domain-nm{font-size:14px;font-weight:800;color:var(--brown);}
+.domain-desc{font-size:11px;color:var(--brown3);margin-top:4px;}
+
+/* ============================================================
+   SERVICES GRID
+   ============================================================ */
+.services-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px;
+  max-width:1000px;margin:0 auto;
+}
+.svc-card{
+  background:var(--white);border-radius:var(--radius);padding:24px;
+  border:1.5px solid rgba(200,169,126,.12);cursor:pointer;transition:all .25s;
+  box-shadow:var(--shadow);
+}
+.svc-card:hover,.svc-card.selected{
+  border-color:var(--gold);box-shadow:var(--shadow2);transform:translateY(-3px);
+}
+.svc-ico{font-size:30px;margin-bottom:12px;}
+.svc-nm{font-size:15px;font-weight:800;color:var(--brown);margin-bottom:6px;}
+.svc-desc{font-size:12px;color:var(--brown3);line-height:1.7;}
+.svc-tag{
+  display:inline-block;margin-top:10px;padding:3px 10px;border-radius:10px;
+  background:rgba(200,169,126,.12);color:var(--gold);font-size:11px;font-weight:700;
+}
+
+/* ============================================================
+   TOOLS GRID (Dashboard أفكار التسويق)
+   ============================================================ */
+.tools-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:800px;margin:0 auto;
+}
+.tool-card{
+  background:var(--white);border-radius:var(--radius);padding:20px;text-align:center;
+  border:1px solid rgba(200,169,126,.12);cursor:pointer;transition:all .25s;box-shadow:var(--shadow);
+}
+.tool-card:hover{border-color:var(--gold);transform:translateY(-3px);box-shadow:var(--shadow2);}
+.tool-ico{font-size:28px;margin-bottom:10px;}
+.tool-nm{font-size:13px;font-weight:800;color:var(--brown);margin-bottom:5px;}
+.tool-desc{font-size:11px;color:var(--brown3);line-height:1.6;margin-bottom:10px;}
+.btn-detail{
+  padding:6px 16px;border-radius:14px;background:linear-gradient(135deg,var(--gold),#a07840);
+  border:none;color:var(--brown);font-size:11px;font-weight:800;cursor:pointer;
+  font-family:'Cairo',sans-serif;transition:all .2s;
+}
+.btn-detail:hover{transform:scale(1.05);}
+
+/* ============================================================
+   PRICING
+   ============================================================ */
+.pricing-wrap{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;align-items:flex-start;}
+.price-card{
+  background:var(--white);border-radius:var(--radius);padding:32px 28px;
+  border:1.5px solid rgba(200,169,126,.15);box-shadow:var(--shadow);
+  flex:1;min-width:240px;max-width:300px;transition:all .3s;
+}
+.price-card.featured{
+  background:linear-gradient(145deg,var(--brown),var(--brown2));
+  border-color:transparent;color:white;transform:scale(1.04);
+  box-shadow:0 12px 48px rgba(62,39,35,.35);
+}
+.price-badge{
+  display:inline-block;padding:4px 12px;border-radius:10px;
+  background:rgba(200,169,126,.2);color:var(--gold2);font-size:11px;font-weight:700;
+  margin-bottom:16px;
+}
+.price-name{font-size:18px;font-weight:900;margin-bottom:6px;}
+.price-card.featured .price-name{color:white;}
+.price-amt{font-size:44px;font-weight:900;color:var(--brown);line-height:1;margin:14px 0;}
+.price-card.featured .price-amt{color:var(--gold2);}
+.price-sym{font-size:20px;vertical-align:super;}
+.price-mo{font-size:13px;color:var(--brown3);}
+.price-card.featured .price-mo{color:rgba(255,255,255,.55);}
+.price-features{list-style:none;margin:20px 0;display:flex;flex-direction:column;gap:10px;}
+.price-features li{font-size:13px;color:var(--brown3);display:flex;align-items:center;gap:8px;}
+.price-features li::before{content:'✓';color:var(--gold);font-weight:900;flex-shrink:0;}
+.price-card.featured .price-features li{color:rgba(255,255,255,.75);}
+.price-card.featured .price-features li::before{color:var(--gold2);}
+.btn-price{
+  width:100%;padding:13px;border-radius:24px;font-size:15px;font-weight:800;cursor:pointer;
+  font-family:'Cairo',sans-serif;background:linear-gradient(135deg,var(--brown),var(--brown2));
+  border:none;color:white;transition:all .25s;margin-top:8px;
+}
+.price-card.featured .btn-price{background:linear-gradient(135deg,var(--gold),#a07840);color:var(--brown);}
+.btn-price:hover{transform:scale(1.02);}
+
+/* Currency selector */
+.currency-wrap{margin-top:20px;position:relative;display:inline-block;}
+.currency-btn{
+  display:flex;align-items:center;gap:8px;padding:9px 18px;border-radius:20px;
+  border:1.5px solid rgba(200,169,126,.35);background:white;cursor:pointer;
+  font-family:'Cairo',sans-serif;font-size:14px;font-weight:700;color:var(--brown);
+  box-shadow:0 2px 10px rgba(62,39,35,.08);transition:all .2s;
+}
+.currency-btn:hover{border-color:var(--gold);}
+.currency-arrow{font-size:10px;color:var(--brown3);transition:transform .2s;}
+.currency-dropdown{
+  display:none;position:absolute;top:110%;right:50%;transform:translateX(50%);
+  background:white;border-radius:14px;box-shadow:0 8px 30px rgba(62,39,35,.15);
+  border:1px solid rgba(200,169,126,.2);z-index:100;min-width:220px;overflow:hidden;
+}
+.currency-opt{
+  padding:11px 18px;font-size:13px;font-weight:700;color:var(--brown);cursor:pointer;
+  font-family:'Cairo',sans-serif;transition:background .15s;
+  border-bottom:1px solid rgba(62,39,35,.05);
+}
+.currency-opt:hover{background:rgba(200,169,126,.1);}
+.currency-opt:last-child{border-bottom:none;}
+
+/* ============================================================
+   TESTIMONIALS
+   ============================================================ */
+.test-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;max-width:900px;margin:0 auto;}
+.test-card{
+  background:var(--white);border-radius:var(--radius);padding:24px;
+  border:1px solid rgba(200,169,126,.12);box-shadow:var(--shadow);
+}
+.test-stars{color:var(--gold);font-size:14px;margin-bottom:10px;}
+.test-q{font-size:32px;color:var(--gold);line-height:1;margin-bottom:6px;opacity:.4;}
+.test-text{font-size:13px;color:var(--brown3);line-height:1.8;}
+.test-name{font-size:14px;font-weight:800;color:var(--brown);margin-top:14px;}
+.test-role{font-size:11px;color:var(--brown3);}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer{
+  background:var(--brown);color:white;
+  padding:clamp(32px,5vw,60px) clamp(16px,5vw,80px);
+}
+.footer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:32px;margin-bottom:32px;}
+.footer-logo{font-size:24px;font-weight:900;margin-bottom:12px;}
+.footer-logo span{color:var(--gold);}
+.footer-desc{font-size:13px;color:rgba(255,255,255,.55);line-height:1.8;}
+.footer-col-title{font-size:13px;font-weight:800;margin-bottom:14px;color:rgba(255,255,255,.7);}
+.footer-links{list-style:none;display:flex;flex-direction:column;gap:8px;}
+.footer-links li a{font-size:13px;color:rgba(255,255,255,.5);transition:color .2s;cursor:pointer;}
+.footer-links li a:hover{color:var(--gold);}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.08);padding-top:20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
+.footer-bottom-text{font-size:12px;color:rgba(255,255,255,.35);}
+
+/* ============================================================
+   LOGIN PAGE
+   ============================================================ */
+#page-login{
+  min-height:100vh;display:flex;align-items:center;justify-content:center;
+  background:radial-gradient(ellipse at center, rgba(200,169,126,.12) 0%, var(--cream) 70%);
+}
+.login-box{
+  background:var(--white);border-radius:24px;padding:clamp(28px,5vw,48px);
+  width:100%;max-width:420px;box-shadow:var(--shadow2);
+  border:1px solid rgba(200,169,126,.15);
+}
+.login-logo{text-align:center;font-size:26px;font-weight:900;color:var(--brown);margin-bottom:6px;}
+.login-logo span{color:var(--gold);}
+.login-title{text-align:center;font-size:18px;font-weight:800;color:var(--brown);margin-bottom:4px;}
+.login-sub{text-align:center;font-size:13px;color:var(--brown3);margin-bottom:28px;}
+.inp-label{display:block;font-size:12px;font-weight:700;color:var(--brown2);margin-bottom:6px;}
+.inp{
+  width:100%;padding:12px 16px;border-radius:12px;border:1.5px solid rgba(200,169,126,.3);
+  background:var(--cream);font-family:'Cairo',sans-serif;font-size:14px;color:var(--brown);
+  outline:none;transition:all .2s;margin-bottom:16px;
+}
+.inp:focus{border-color:var(--gold);background:white;box-shadow:0 0 0 3px rgba(200,169,126,.12);}
+.remember{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--brown3);cursor:pointer;margin-bottom:20px;}
+.btn-login{
+  width:100%;padding:14px;border-radius:20px;
+  background:linear-gradient(135deg,var(--brown),var(--brown2));
+  border:none;color:white;font-size:15px;font-weight:800;cursor:pointer;
+  font-family:'Cairo',sans-serif;transition:all .2s;
+}
+.btn-login:hover{transform:scale(1.02);box-shadow:var(--shadow2);}
+.login-or{text-align:center;font-size:12px;color:var(--brown3);margin:16px 0;position:relative;}
+.login-or::before,.login-or::after{
+  content:'';position:absolute;top:50%;width:40%;height:1px;
+  background:rgba(200,169,126,.25);
+}
+.login-or::before{right:0;}
+.login-or::after{left:0;}
+.btn-google{
+  width:100%;padding:12px;border-radius:20px;border:1.5px solid rgba(200,169,126,.3);
+  background:white;font-size:14px;font-weight:700;cursor:pointer;font-family:'Cairo',sans-serif;
+  color:var(--brown);display:flex;align-items:center;justify-content:center;gap:10px;
+  transition:all .2s;
+}
+.btn-google:hover{border-color:var(--gold);background:rgba(200,169,126,.05);}
+.login-footer-links{display:flex;justify-content:space-between;margin-top:20px;flex-wrap:wrap;gap:8px;}
+.login-footer-links span{font-size:13px;color:var(--brown3);cursor:pointer;}
+.login-footer-links span:hover{color:var(--gold);}
+
+/* ============================================================
+   DASHBOARD
+   ============================================================ */
+#page-dashboard{display:none;min-height:100vh;background:var(--cream);}
+#page-dashboard.active{display:flex;}
+.sb{
+  width:240px;min-height:100vh;background:var(--brown);color:white;
+  display:flex;flex-direction:column;position:fixed;top:0;right:0;z-index:100;
+  padding:24px 0;transition:transform .3s;
+}
+.sb-logo{padding:0 24px 24px;font-size:20px;font-weight:900;border-bottom:1px solid rgba(255,255,255,.08);}
+.sb-logo span{color:var(--gold);}
+.sb-nav{flex:1;padding:16px 0;overflow-y:auto;}
+.sb-item{
+  display:flex;align-items:center;gap:12px;padding:11px 24px;
+  font-size:13px;font-weight:700;cursor:pointer;transition:all .2s;
+  color:rgba(255,255,255,.65);
+}
+.sb-item:hover,.sb-item.active{background:rgba(255,255,255,.08);color:white;}
+.sb-item.active{border-right:3px solid var(--gold);}
+.sb-ico{font-size:16px;width:20px;text-align:center;}
+.sb-footer{padding:16px 24px;border-top:1px solid rgba(255,255,255,.08);}
+.sb-user{display:flex;align-items:center;gap:10px;}
+.sb-avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--gold),#a07840);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:var(--brown);flex-shrink:0;}
+.sb-name{font-size:12px;font-weight:700;color:rgba(255,255,255,.8);}
+.sb-plan{font-size:10px;color:rgba(255,255,255,.35);}
+
+.dash-content{margin-right:240px;flex:1;padding:clamp(20px,3vw,40px);padding-top:clamp(20px,3vw,40px);}
+.dash-topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px;flex-wrap:wrap;gap:14px;}
+.dash-greeting{font-size:clamp(18px,2.5vw,24px);font-weight:900;color:var(--brown);}
+.dash-greeting span{color:var(--gold);}
+.dash-search{
+  display:flex;align-items:center;gap:10px;background:white;border-radius:24px;
+  padding:10px 18px;border:1.5px solid rgba(200,169,126,.2);flex:1;max-width:360px;
+}
+.dash-search input{border:none;outline:none;font-family:'Cairo',sans-serif;font-size:13px;flex:1;background:transparent;color:var(--brown);}
+.dash-search input::placeholder{color:var(--brown3);opacity:.6;}
+.btn-new-project{
+  display:flex;align-items:center;gap:8px;padding:10px 20px;border-radius:20px;
+  background:linear-gradient(135deg,var(--brown),var(--brown2));color:white;
+  font-size:13px;font-weight:800;cursor:pointer;border:none;font-family:'Cairo',sans-serif;
+  transition:all .2s;white-space:nowrap;
+}
+.btn-new-project:hover{transform:scale(1.03);box-shadow:var(--shadow);}
+
+.tab-c{display:none;}
+.tab-c.active{display:block;}
+
+/* dash cards */
+.dash-card{
+  background:var(--white);border-radius:var(--radius);padding:20px 24px;
+  border:1px solid rgba(200,169,126,.12);box-shadow:var(--shadow);margin-bottom:20px;
+}
+.dash-card-title{font-size:15px;font-weight:800;color:var(--brown);margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid rgba(200,169,126,.12);}
+
+/* list items */
+.li-item{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid rgba(62,39,35,.05);}
+.li-item:last-child{border-bottom:none;padding-bottom:0;}
+.li-ico{font-size:20px;width:38px;height:38px;border-radius:10px;background:rgba(200,169,126,.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.li-info{flex:1;}
+.li-name{font-size:13px;font-weight:700;color:var(--brown);}
+.li-sub{font-size:11px;color:var(--brown3);}
+.badge{padding:3px 10px;border-radius:10px;font-size:10px;font-weight:800;}
+.badge-green{background:rgba(34,197,94,.1);color:#16a34a;}
+.badge-gold{background:rgba(200,169,126,.15);color:var(--brown2);}
+.badge-blue{background:rgba(59,130,246,.1);color:#1d4ed8;}
+
+/* stats row */
+.stats-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:16px;margin-bottom:20px;}
+.stat-card{
+  background:var(--white);border-radius:var(--radius);padding:18px;
+  border:1px solid rgba(200,169,126,.12);box-shadow:var(--shadow);
+}
+.stat-card-num{font-size:28px;font-weight:900;color:var(--brown);margin-bottom:4px;}
+.stat-card-lbl{font-size:11px;color:var(--brown3);}
+.stat-card-change{font-size:11px;color:#16a34a;font-weight:700;}
+
+/* ============================================================
+   SERVICES PAGE (WIZARD)
+   ============================================================ */
+#page-services{background:var(--cream);padding-top:62px;}
+.svc-page-wrap{padding:32px clamp(16px,5vw,72px);}
+
+.wizard-bar{
+  display:flex;align-items:center;justify-content:center;gap:0;
+  margin-bottom:36px;padding:20px;background:white;border-radius:var(--radius);
+  box-shadow:var(--shadow);flex-wrap:wrap;gap:8px;
+}
+.wz-step{
+  display:flex;align-items:center;gap:8px;padding:8px 16px;border-radius:20px;
+  font-size:13px;font-weight:700;color:var(--brown3);transition:all .3s;cursor:pointer;
+}
+.wz-step.active{background:linear-gradient(135deg,var(--brown),var(--brown2));color:white;}
+.wz-step.done{color:var(--gold);font-weight:800;}
+.wz-num{
+  width:26px;height:26px;border-radius:50%;border:2px solid currentColor;
+  display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;
+  flex-shrink:0;
+}
+.wz-step.done .wz-num{background:rgba(200,169,126,.15);border-color:var(--gold);}
+.wz-sep{color:var(--brown3);opacity:.3;font-size:14px;padding:0 4px;}
+
+.svc-step{display:none;}
+.svc-step.active{display:block;}
+.svc-step-title{font-size:clamp(18px,2.5vw,26px);font-weight:900;color:var(--brown);margin-bottom:6px;}
+.svc-step-sub{font-size:14px;color:var(--brown3);margin-bottom:28px;}
+
+/* Pick cards (domain selection) */
+.pick-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px;max-width:800px;}
+.pick-card{
+  background:var(--white);border-radius:var(--radius);padding:20px 14px;text-align:center;
+  border:2px solid rgba(200,169,126,.15);cursor:pointer;transition:all .25s;box-shadow:var(--shadow);
+}
+.pick-card:hover,.pick-card.selected{
+  border-color:var(--gold);transform:translateY(-4px);box-shadow:0 10px 28px rgba(200,169,126,.25);
+}
+.pick-ico{font-size:32px;margin-bottom:10px;}
+.pick-nm{font-size:13px;font-weight:800;color:var(--brown);}
+.pick-desc{font-size:11px;color:var(--brown3);margin-top:4px;}
+
+/* Service cards */
+.svc-cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;max-width:900px;}
+
+/* Form */
+.form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;max-width:800px;}
+.form-group{display:flex;flex-direction:column;gap:6px;}
+.form-label{font-size:12px;font-weight:700;color:var(--brown2);}
+.form-inp{
+  padding:11px 14px;border-radius:12px;border:1.5px solid rgba(200,169,126,.3);
+  background:white;font-family:'Cairo',sans-serif;font-size:13px;color:var(--brown);
+  outline:none;transition:all .2s;
+}
+.form-inp:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(200,169,126,.1);}
+.form-inp.full{grid-column:1/-1;}
+.budget-row{display:flex;gap:10px;align-items:center;}
+.budget-row .form-inp{flex:1;}
+.budget-currency{
+  padding:11px 14px;border-radius:12px;border:1.5px solid rgba(200,169,126,.3);
+  background:white;font-family:'Cairo',sans-serif;font-size:13px;color:var(--brown);
+  outline:none;cursor:pointer;transition:all .2s;min-width:90px;
+}
+.budget-currency:focus{border-color:var(--gold);}
+
+/* Type grids */
+.type-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;max-width:700px;margin-bottom:24px;}
+.type-card{
+  background:white;border-radius:12px;padding:16px;text-align:center;
+  border:2px solid rgba(200,169,126,.15);cursor:pointer;transition:all .2s;box-shadow:var(--shadow);
+}
+.type-card:hover,.type-card.selected{border-color:var(--gold);background:rgba(200,169,126,.06);}
+.type-ico{font-size:22px;margin-bottom:8px;}
+.type-nm{font-size:12px;font-weight:800;color:var(--brown);}
+
+/* Result */
+.result-box{
+  background:white;border-radius:var(--radius);padding:28px;box-shadow:var(--shadow);
+  border:1px solid rgba(200,169,126,.12);max-width:800px;
+}
+.result-title{font-size:18px;font-weight:900;color:var(--brown);margin-bottom:16px;display:flex;align-items:center;gap:8px;}
+.result-text{
+  line-height:2;font-size:14px;color:var(--brown2);
+  white-space:pre-line;border:1px solid rgba(200,169,126,.15);
+  border-radius:12px;padding:20px;background:var(--cream);min-height:200px;
+}
+.result-actions{display:flex;gap:10px;margin-top:20px;flex-wrap:wrap;}
+.btn-act{
+  display:flex;align-items:center;gap:6px;padding:10px 18px;border-radius:16px;
+  font-size:13px;font-weight:700;cursor:pointer;border:none;font-family:'Cairo',sans-serif;transition:all .2s;
+}
+.btn-act-copy{background:rgba(62,39,35,.08);color:var(--brown);}
+.btn-act-calendar{background:rgba(34,197,94,.1);color:#16a34a;}
+.btn-act-download{background:rgba(59,130,246,.1);color:#1d4ed8;}
+.btn-act-new{background:linear-gradient(135deg,var(--brown),var(--brown2));color:white;}
+.btn-act:hover{transform:scale(1.04);}
+
+.upsell-box{
+  margin-top:20px;padding:20px;border-radius:var(--radius);
+  background:linear-gradient(135deg,rgba(62,39,35,.04),rgba(200,169,126,.1));
+  border:1px solid rgba(200,169,126,.25);
+}
+.upsell-title{font-size:15px;font-weight:800;color:var(--brown);margin-bottom:6px;}
+.upsell-sub{font-size:13px;color:var(--brown3);margin-bottom:14px;line-height:1.7;}
+.upsell-btns{display:flex;gap:10px;flex-wrap:wrap;}
+.btn-sm{
+  padding:7px 16px;border-radius:14px;border:1.5px solid rgba(200,169,126,.35);
+  background:transparent;color:var(--brown);font-size:12px;font-weight:700;cursor:pointer;
+  font-family:'Cairo',sans-serif;transition:all .2s;
+}
+.btn-sm:hover{border-color:var(--gold);background:rgba(200,169,126,.08);}
+.btn-sm-primary{background:linear-gradient(135deg,var(--gold),#a07840);border-color:transparent;color:var(--brown);}
+
+/* nav back */
+.btn-back{
+  display:inline-flex;align-items:center;gap:8px;padding:9px 18px;border-radius:18px;
+  background:rgba(62,39,35,.08);border:none;color:var(--brown);font-size:13px;font-weight:700;
+  cursor:pointer;font-family:'Cairo',sans-serif;transition:all .2s;margin-bottom:20px;
+}
+.btn-back:hover{background:rgba(62,39,35,.14);}
+.btn-cta-main{
+  margin-top:28px;padding:14px 40px;border-radius:28px;
+  background:linear-gradient(135deg,var(--brown),var(--brown2));
+  color:white;font-size:15px;font-weight:800;cursor:pointer;border:none;
+  font-family:'Cairo',sans-serif;transition:all .25s;box-shadow:var(--shadow);
+}
+.btn-cta-main:hover{transform:translateY(-2px);box-shadow:var(--shadow2);}
+
+/* ============================================================
+   CONTENT CALENDAR (locked)
+   ============================================================ */
+.cal-locked{
+  text-align:center;padding:48px;background:white;border-radius:var(--radius);
+  border:2px dashed rgba(200,169,126,.3);
+}
+.cal-locked-ico{font-size:48px;margin-bottom:16px;}
+.cal-locked-title{font-size:20px;font-weight:900;color:var(--brown);margin-bottom:8px;}
+.cal-locked-sub{font-size:14px;color:var(--brown3);margin-bottom:20px;line-height:1.7;}
+
+/* ============================================================
+   CHATBOT
+   ============================================================ */
+.chat-bubble{
+  position:fixed;bottom:24px;left:24px;z-index:300;
+  width:54px;height:54px;border-radius:50%;
+  background:linear-gradient(135deg,var(--brown),var(--brown2));
+  display:flex;align-items:center;justify-content:center;font-size:22px;
+  cursor:pointer;box-shadow:0 4px 20px rgba(62,39,35,.35);transition:all .3s;
+}
+.chat-bubble:hover{transform:scale(1.1);}
+.chat-window{
+  position:fixed;bottom:90px;left:24px;z-index:300;
+  width:320px;max-height:480px;border-radius:20px;background:white;
+  box-shadow:0 12px 48px rgba(62,39,35,.25);border:1px solid rgba(200,169,126,.2);
+  display:none;flex-direction:column;overflow:hidden;
+}
+.chat-window.open{display:flex;}
+.chat-hd{
+  background:linear-gradient(135deg,var(--brown),var(--brown2));
+  padding:16px 18px;display:flex;align-items:center;justify-content:space-between;
+}
+.chat-hd-info{display:flex;align-items:center;gap:10px;}
+.chat-hd-avatar{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:14px;}
+.chat-hd-name{font-size:13px;font-weight:800;color:white;}
+.chat-hd-status{font-size:11px;color:rgba(255,255,255,.6);}
+.chat-hd-close{background:none;border:none;color:rgba(255,255,255,.7);font-size:16px;cursor:pointer;padding:4px;transition:color .2s;}
+.chat-hd-close:hover{color:white;}
+.chat-msgs{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px;}
+.msg{
+  max-width:85%;padding:10px 14px;border-radius:16px;font-size:13px;line-height:1.7;
+  word-break:break-word;animation:fadeMsg .25s ease;
+}
+.msg.bot{
+  background:var(--cream);color:var(--brown);
+  border-bottom-right-radius:4px;align-self:flex-end;border:1px solid rgba(200,169,126,.15);
+}
+.msg.user{
+  background:linear-gradient(135deg,var(--brown),var(--brown2));color:white;
+  border-bottom-left-radius:4px;align-self:flex-start;
+}
+.chat-quick{display:flex;gap:6px;padding:0 14px 10px;flex-wrap:wrap;}
+.quick-btn{
+  padding:5px 12px;border-radius:12px;border:1.5px solid rgba(200,169,126,.25);
+  background:rgba(200,169,126,.06);color:var(--brown2);font-size:11px;font-weight:700;
+  cursor:pointer;font-family:'Cairo',sans-serif;transition:all .2s;white-space:nowrap;
+}
+.quick-btn:hover{background:rgba(200,169,126,.15);border-color:var(--gold);}
+.chat-inp-wrap{
+  padding:10px 12px 14px;border-top:1px solid rgba(200,169,126,.12);
+  display:flex;gap:8px;align-items:center;
+}
+.chat-inp{
+  flex:1;padding:9px 14px;border-radius:16px;border:1.5px solid rgba(200,169,126,.25);
+  font-family:'Cairo',sans-serif;font-size:13px;color:var(--brown);outline:none;
+  background:var(--cream);transition:all .2s;
+}
+.chat-inp:focus{border-color:var(--gold);background:white;}
+.chat-send{
+  width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--brown),var(--brown2));
+  border:none;color:white;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;
+  transition:all .2s;flex-shrink:0;
+}
+.chat-send:hover{transform:scale(1.1);}
+
+/* ============================================================
+   TOAST
+   ============================================================ */
+.toast{
+  position:fixed;bottom:100px;left:50%;transform:translateX(-50%) translateY(20px);
+  background:var(--brown);color:white;padding:10px 22px;border-radius:20px;
+  font-size:13px;font-weight:700;z-index:500;opacity:0;transition:all .3s;pointer-events:none;
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+/* ============================================================
+   AI LOADING
+   ============================================================ */
+.ai-loading{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:60px 20px;gap:16px;
+}
+.ai-dots{display:flex;gap:8px;}
+.ai-dot{
+  width:10px;height:10px;border-radius:50%;background:var(--gold);
+  animation:bounce .8s infinite;
+}
+.ai-dot:nth-child(2){animation-delay:.15s;}
+.ai-dot:nth-child(3){animation-delay:.3s;}
+.ai-loading-text{font-size:14px;color:var(--brown3);font-weight:600;}
+
+/* ============================================================
+   ANIMATIONS
+   ============================================================ */
+@keyframes fadeDown{from{opacity:0;transform:translateY(-16px);}to{opacity:1;transform:translateY(0);}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+@keyframes fadeMsg{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+@keyframes bounce{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media(max-width:768px){
+  .sb{transform:translateX(100%);width:260px;}
+  .sb.open{transform:translateX(0);}
+  .dash-content{margin-right:0;padding:16px;}
+  .flow-step:not(:last-child)::after{display:none;}
+  .tools-grid{grid-template-columns:repeat(2,1fr);}
+  .hero-stats{gap:24px;}
+  .nav-links{gap:4px;}
+  .nav-link{display:none;}
+}
+</style>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+
+<!-- ============================================================
+     NAV
+     ============================================================ -->
+<nav id="main-nav">
+  <div class="nav-logo" onclick="goPage('landing')">سَ<span>وقلي</span></div>
+  <div class="nav-links">
+    <div class="nav-link" onclick="sTo('how')">كيف يعمل</div>
+    <div class="nav-link" onclick="sTo('services-section')">الخدمات</div>
+    <div class="nav-link" onclick="sTo('pricing')">الأسعار</div>
+    <button class="nav-btn" onclick="goPage('signup')">ابدأ مجاناً ✨</button>
+  </div>
+</nav>
+
+<!-- ============================================================
+     LANDING PAGE
+     ============================================================ -->
+<div id="page-landing" class="page active">
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-tag">🚀 منصة التسويق الذكي بالـ AI</div>
+    <h1 class="hero-h1">سَوّق مشروعك<br/>بـ <span>ذكاء اصطناعي</span></h1>
+    <p class="hero-sub">سَوقلي بتديك أفكار محتوى، خطط تسويق، سكريبتات فيديو، وحملات إعلانية — كل حاجة في دقائق!</p>
+    <div class="hero-btns">
+      <button class="btn-primary" onclick="goPage('signup')">ابدأ مجاناً ✨</button>
+      <button class="btn-secondary" onclick="startServiceFlow('restaurant')">جرّب دلوقتي</button>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-num">30<span>+</span></div><div class="stat-lbl">فكرة محتوى مجاناً</div></div>
+      <div class="stat"><div class="stat-num">6<span>+</span></div><div class="stat-lbl">مجالات مختلفة</div></div>
+      <div class="stat"><div class="stat-num">AI<span>✦</span></div><div class="stat-lbl">ذكاء اصطناعي متقدم</div></div>
+      <div class="stat"><div class="stat-num">5<span>دق</span></div><div class="stat-lbl">للحصول على النتيجة</div></div>
+    </div>
+  </section>
+
+  <!-- كيف يعمل -->
+  <section class="section section-alt" id="how">
+    <div class="sec-head">
+      <div class="sec-tag">مسار المستخدم</div>
+      <h2 class="sec-title">كيف يعمل سَوقلي؟</h2>
+      <p class="sec-sub">4 خطوات بسيطة وتحصل على نتيجة احترافية</p>
+      <div class="gold-line"></div>
+    </div>
+    <div class="flow-steps">
+      <div class="flow-step">
+        <div class="step-num">1</div>
+        <div class="step-name">اختيار المجال</div>
+        <div class="step-desc">اختار مجال مشروعك — مطاعم، ملابس، تجارة، وغيرها</div>
+      </div>
+      <div class="flow-step">
+        <div class="step-num">2</div>
+        <div class="step-name">اختيار الخدمة</div>
+        <div class="step-desc">اختار الخدمة المناسبة لمجالك — خدمات مخصصة لكل مجال</div>
+      </div>
+      <div class="flow-step">
+        <div class="step-num">3</div>
+        <div class="step-name">بيانات المشروع</div>
+        <div class="step-desc">أدخل اسم مشروعك، ميزانيتك، وجمهورك المستهدف</div>
+      </div>
+      <div class="flow-step">
+        <div class="step-num">4</div>
+        <div class="step-name">النتيجة</div>
+        <div class="step-desc">احصل على نتيجة AI جاهزة للنسخ والتحميل والنشر</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- المجالات -->
+  <section class="section" id="services-section">
+    <div class="sec-head">
+      <div class="sec-tag">اختر مجالك</div>
+      <h2 class="sec-title">لكل مجال خدمات مخصصة</h2>
+      <p class="sec-sub">الخدمات بتتغير حسب مجالك — مش نفس الخدمات لكل الناس</p>
+      <div class="gold-line"></div>
+    </div>
+    <div class="domains-grid">
+      <div class="domain-card" onclick="startServiceFlow('restaurant')">
+        <div class="domain-ico">🍔</div>
+        <div class="domain-nm">مطاعم</div>
+        <div class="domain-desc">أكل، مقاهي، كافيهات</div>
+      </div>
+      <div class="domain-card" onclick="startServiceFlow('fashion')">
+        <div class="domain-ico">👕</div>
+        <div class="domain-nm">ملابس</div>
+        <div class="domain-desc">ملابس، موضة، إكسسوارات</div>
+      </div>
+      <div class="domain-card" onclick="startServiceFlow('retail')">
+        <div class="domain-ico">🏪</div>
+        <div class="domain-nm">مشاريع تجارية</div>
+        <div class="domain-desc">متاجر، بيع بالتجزئة</div>
+      </div>
+      <div class="domain-card" onclick="startServiceFlow('beauty')">
+        <div class="domain-ico">🧴</div>
+        <div class="domain-nm">تجميل</div>
+        <div class="domain-desc">صالونات، عناية، مكياج</div>
+      </div>
+      <div class="domain-card" onclick="startServiceFlow('tech')">
+        <div class="domain-ico">💻</div>
+        <div class="domain-nm">تقنية</div>
+        <div class="domain-desc">تطبيقات، مواقع، تقنية</div>
+      </div>
+      <div class="domain-card" onclick="startServiceFlow('services')">
+        <div class="domain-ico">🏥</div>
+        <div class="domain-nm">خدمات</div>
+        <div class="domain-desc">طب، تعليم، استشارات</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- الخدمات الأساسية -->
+  <section class="section section-alt">
+    <div class="sec-head">
+      <div class="sec-tag">أدوات AI</div>
+      <h2 class="sec-title">الخدمات الأساسية</h2>
+      <p class="sec-sub">كل أداة مصممة لتوفير وقتك وتضاعف مبيعاتك</p>
+      <div class="gold-line"></div>
+    </div>
+    <div class="services-grid">
+      <div class="svc-card" onclick="startServiceFlow('restaurant')">
+        <div class="svc-ico">💡</div>
+        <div class="svc-nm">مولد أفكار المحتوى</div>
+        <div class="svc-desc">30 فكرة محتوى جاهزة لمنصاتك — Instagram، TikTok، Facebook</div>
+        <span class="svc-tag">🔥 الأكثر طلباً</span>
+      </div>
+      <div class="svc-card" onclick="startServiceFlow('restaurant')">
+        <div class="svc-ico">🎬</div>
+        <div class="svc-nm">مولد سكريبتات الفيديو</div>
+        <div class="svc-desc">سكريبت كامل مع مشاهد ولقطات وكابشن وهاشتاجات</div>
+        <span class="svc-tag">🎥 فيديو</span>
+      </div>
+      <div class="svc-card" onclick="startServiceFlow('restaurant')">
+        <div class="svc-ico">📋</div>
+        <div class="svc-nm">مولد خطة التسويق</div>
+        <div class="svc-desc">خطة تسويق كاملة شهرية مخصصة لمشروعك وميزانيتك</div>
+        <span class="svc-tag">📈 نمو</span>
+      </div>
+      <div class="svc-card" onclick="startServiceFlow('restaurant')">
+        <div class="svc-ico">🎯</div>
+        <div class="svc-nm">مولد الحملات الإعلانية</div>
+        <div class="svc-desc">حملات TikTok وInstagram مستهدفة بأقل تكلفة وأعلى عائد</div>
+        <span class="svc-tag">💰 فعّال</span>
+      </div>
+      <div class="svc-card" onclick="goPage('login')">
+        <div class="svc-ico">📅</div>
+        <div class="svc-nm">Content Calendar</div>
+        <div class="svc-desc">جدول نشر شهري كامل — الأحد لغاية السبت — للمشتركين</div>
+        <span class="svc-tag">⭐ Pro</span>
+      </div>
+      <div class="svc-card" onclick="goPage('login')">
+        <div class="svc-ico">🔍</div>
+        <div class="svc-nm">تحليل المنافسين</div>
+        <div class="svc-desc">تحليل حسابات منافسيك واقتراح أفضل محتوى تنافسي</div>
+        <span class="svc-tag">⭐ Pro</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- الأسعار -->
+  <section class="section" id="pricing">
+    <div class="sec-head">
+      <div class="sec-tag">اشتراكات</div>
+      <h2 class="sec-title">اختر خطتك</h2>
+      <p class="sec-sub">اشتراكات مرنة تناسب كل مشروع</p>
+      <div class="gold-line"></div>
+      <!-- اختيار العملة -->
+      <div class="currency-wrap" id="currency-wrap">
+        <button class="currency-btn" onclick="toggleCurrencyDropdown()">
+          <span id="sel-flag">🇺🇸</span>
+          <span id="sel-label">USD — دولار أمريكي</span>
+          <span class="currency-arrow" id="cur-arrow">▼</span>
+        </button>
+        <div class="currency-dropdown" id="currency-dropdown">
+          <div class="currency-opt" onclick="setCurrency('USD','$','🇺🇸','دولار أمريكي',1)">🇺🇸 USD — دولار أمريكي</div>
+          <div class="currency-opt" onclick="setCurrency('EGP','ج.م','🇪🇬','جنيه مصري',50)">🇪🇬 EGP — جنيه مصري</div>
+          <div class="currency-opt" onclick="setCurrency('SAR','ر.س','🇸🇦','ريال سعودي',3.75)">🇸🇦 SAR — ريال سعودي</div>
+          <div class="currency-opt" onclick="setCurrency('AED','د.إ','🇦🇪','درهم إماراتي',3.67)">🇦🇪 AED — درهم إماراتي</div>
+          <div class="currency-opt" onclick="setCurrency('KWD','د.ك','🇰🇼','دينار كويتي',0.31)">🇰🇼 KWD — دينار كويتي</div>
+          <div class="currency-opt" onclick="setCurrency('QAR','ر.ق','🇶🇦','ريال قطري',3.64)">🇶🇦 QAR — ريال قطري</div>
+        </div>
+      </div>
+    </div>
+    <div class="pricing-wrap">
+      <div class="price-card">
+        <div class="price-name">مجاني</div>
+        <div class="price-badge">Free</div>
+        <div class="price-amt"><span class="price-sym" id="sym0">$</span><span id="p0">0</span></div>
+        <div class="price-mo">للأبد</div>
+        <ul class="price-features">
+          <li>10 أفكار محتوى يومياً</li>
+          <li>خطة تسويق بسيطة</li>
+          <li>سكريبت فيديو واحد/شهر</li>
+          <li>الشات بوت الذكي</li>
+        </ul>
+        <button class="btn-price" onclick="goPage('signup')">ابدأ مجاناً</button>
+      </div>
+      <div class="price-card featured">
+        <div class="price-name">Pro</div>
+        <div class="price-badge">الأكثر شعبية ⭐</div>
+        <div class="price-amt"><span class="price-sym" id="sym1">$</span><span id="p1">10</span></div>
+        <div class="price-mo">شهرياً</div>
+        <ul class="price-features">
+          <li>أفكار محتوى غير محدودة</li>
+          <li>Content Calendar شهري</li>
+          <li>سكريبتات فيديو غير محدودة</li>
+          <li>مولد الإعلانات</li>
+          <li>تحليل المنافسين</li>
+          <li>حملات TikTok وInstagram</li>
+        </ul>
+        <button class="btn-price" onclick="goPage('login')">اشترك الآن ⭐</button>
+      </div>
+      <div class="price-card">
+        <div class="price-name">Business</div>
+        <div class="price-badge">للشركات</div>
+        <div class="price-amt"><span class="price-sym" id="sym2">$</span><span id="p2">25</span></div>
+        <div class="price-mo">شهرياً</div>
+        <ul class="price-features">
+          <li>كل ميزات Pro</li>
+          <li>عدة مشاريع</li>
+          <li>تقارير تفصيلية</li>
+          <li>أولوية في الدعم</li>
+          <li>AI Product Model</li>
+        </ul>
+        <button class="btn-price" onclick="goPage('login')">اشترك الآن</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- آراء العملاء -->
+  <section class="section section-alt">
+    <div class="sec-head">
+      <div class="sec-tag">آراء العملاء</div>
+      <h2 class="sec-title">ماذا قالوا عن سَوقلي؟</h2>
+      <div class="gold-line"></div>
+    </div>
+    <div class="test-grid">
+      <div class="test-card">
+        <div class="test-stars">★★★★★</div>
+        <div class="test-q">"</div>
+        <div class="test-text">بعد ما استخدمت سَوقلي مبيعاتي زادت 3 أضعاف في 3 شهور. الأفكار عملية وسهلة التطبيق.</div>
+        <div class="test-name">أحمد محمد</div>
+        <div class="test-role">صاحب مطعم — القاهرة</div>
+      </div>
+      <div class="test-card">
+        <div class="test-stars">★★★★★</div>
+        <div class="test-q">"</div>
+        <div class="test-text">خطة التسويق اللي طلعت من سَوقلي أحسن من اللي دفعت فيها آلاف لمتخصص تسويق.</div>
+        <div class="test-name">سارة الأحمد</div>
+        <div class="test-role">صاحبة متجر ملابس — الرياض</div>
+      </div>
+      <div class="test-card">
+        <div class="test-stars">★★★★★</div>
+        <div class="test-q">"</div>
+        <div class="test-text">وفّرت ساعات في كتابة المحتوى. أفكار TikTok اللي طلعت زادت متابعيني 10 آلاف في شهر.</div>
+        <div class="test-name">محمد علي</div>
+        <div class="test-role">صاحب متجر إلكتروني — دبي</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">سَ<span>وقلي</span></div>
+        <div class="footer-desc">منصة التسويق الذكي للمشاريع الصغيرة والمتوسطة في العالم العربي.</div>
+      </div>
+      <div>
+        <div class="footer-col-title">المجالات</div>
+        <ul class="footer-links">
+          <li><a onclick="startServiceFlow('restaurant')">مطاعم</a></li>
+          <li><a onclick="startServiceFlow('fashion')">ملابس</a></li>
+          <li><a onclick="startServiceFlow('retail')">مشاريع تجارية</a></li>
+          <li><a onclick="startServiceFlow('beauty')">تجميل</a></li>
+          <li><a onclick="startServiceFlow('tech')">تقنية</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">الخدمات</div>
+        <ul class="footer-links">
+          <li><a onclick="startServiceFlow('restaurant')">أفكار المحتوى</a></li>
+          <li><a onclick="startServiceFlow('restaurant')">سكريبتات الفيديو</a></li>
+          <li><a onclick="startServiceFlow('restaurant')">خطة التسويق</a></li>
+          <li><a onclick="startServiceFlow('restaurant')">الحملات الإعلانية</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">المنصة</div>
+        <ul class="footer-links">
+          <li><a onclick="goPage('login')">تسجيل الدخول</a></li>
+          <li><a onclick="goPage('login')">إنشاء حساب</a></li>
+          <li><a onclick="sTo('pricing')">الأسعار</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-bottom-text">© 2025 سَوقلي. جميع الحقوق محفوظة.</div>
+      <div class="footer-bottom-text">AI-Powered Marketing Platform 🚀</div>
+    </div>
+  </footer>
+</div>
+
+<!-- ============================================================
+     LOGIN PAGE
+     ============================================================ -->
+<div id="page-login" class="page">
+  <div id="page-login-inner" style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:radial-gradient(ellipse at center, rgba(200,169,126,.12) 0%, var(--cream) 70%);padding:20px;">
+    <div class="login-box">
+      <div class="login-logo">سَ<span>وقلي</span></div>
+      <!-- تبويب دخول / تسجيل -->
+      <div style="display:flex;background:rgba(200,169,126,.1);border-radius:16px;padding:4px;margin-bottom:20px;gap:4px">
+        <button id="tab-login-btn" onclick="switchAuthTab('login')" style="flex:1;padding:10px;border-radius:12px;border:none;font-family:'Cairo',sans-serif;font-size:13px;font-weight:800;cursor:pointer;background:white;color:var(--brown);box-shadow:0 2px 8px rgba(0,0,0,.08)">تسجيل الدخول</button>
+        <button id="tab-signup-btn" onclick="switchAuthTab('signup')" style="flex:1;padding:10px;border-radius:12px;border:none;font-family:'Cairo',sans-serif;font-size:13px;font-weight:700;cursor:pointer;background:transparent;color:var(--brown3)">حساب جديد</button>
+      </div>
+
+      <!-- فورم الدخول -->
+      <div id="auth-login-form">
+        <div class="login-title">مرحباً بك 👋</div>
+        <div class="login-sub">سجّل دخولك لتبدأ في تسويق مشروعك</div>
+        <label class="inp-label">البريد الإلكتروني</label>
+        <input class="inp" type="email" id="login-email" placeholder="example@email.com"/>
+        <label class="inp-label">كلمة المرور</label>
+        <input class="inp" type="password" id="login-pass" placeholder="••••••••" onkeydown="if(event.key==='Enter')handleLogin()"/>
+        <label class="remember">
+          <input type="checkbox" id="remember-me" style="accent-color:var(--gold)"/> تذكرني
+        </label>
+        <button class="btn-login" onclick="handleLogin()">تسجيل الدخول 🚀</button>
+      </div>
+
+      <!-- فورم التسجيل -->
+      <div id="auth-signup-form" style="display:none">
+        <div class="login-title">انضم لسَوقلي 🚀</div>
+        <div class="login-sub">إنشاء حساب مجاني في ثوانٍ</div>
+        <label class="inp-label">الاسم</label>
+        <input class="inp" type="text" id="signup-name" placeholder="اسمك الكامل"/>
+        <label class="inp-label">البريد الإلكتروني</label>
+        <input class="inp" type="email" id="signup-email" placeholder="example@email.com"/>
+        <label class="inp-label">كلمة المرور</label>
+        <input class="inp" type="password" id="signup-pass" placeholder="6 حروف على الأقل" onkeydown="if(event.key==='Enter')handleSignup()"/>
+        <button class="btn-login btn-signup" onclick="handleSignup()" style="margin-top:20px">إنشاء حساب مجاني 🎉</button>
+      </div>
+
+      <div class="login-or">أو</div>
+      <button class="btn-google" onclick="handleLogin()">
+        <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+        تسجيل الدخول بـ Google
+      </button>
+      <div class="login-footer-links">
+        <span onclick="goPage('landing')">← العودة للرئيسية</span>
+        <span style="color:var(--gold)">إنشاء حساب جديد</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     DASHBOARD PAGE
+     ============================================================ -->
+<!-- SIGNUP PAGE -->
+<div id="page-signup" class="page">
+  <div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:radial-gradient(ellipse at center, rgba(200,169,126,.12) 0%, var(--cream) 70%);padding:20px;">
+    <div class="login-box">
+      <div class="login-logo">سَ<span>وقلي</span></div>
+      <div class="login-title">إنشاء حساب جديد 🚀</div>
+      <div class="login-sub">ابدأ رحلتك في التسويق الذكي</div>
+      <label class="inp-label">الاسم</label>
+      <input class="inp" type="text" id="signup-name" placeholder="اسمك الكامل"/>
+      <label class="inp-label">البريد الإلكتروني</label>
+      <input class="inp" type="email" id="signup-email" placeholder="example@email.com"/>
+      <label class="inp-label">كلمة المرور</label>
+      <input class="inp" type="password" id="signup-pass" placeholder="6 حروف على الأقل" onkeydown="if(event.key==='Enter')handleSignup()"/>
+      <button class="btn-login btn-signup" onclick="handleSignup()" style="margin-top:20px">إنشاء حساب 🚀</button>
+      <div style="text-align:center;margin-top:16px;font-size:13px;color:var(--brown3)">
+        عندك حساب؟ <a href="#" onclick="goPage('login')" style="color:var(--gold);font-weight:700">سجّل دخولك ←</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="page-dashboard" class="page">
+  <!-- Sidebar -->
+  <div class="sb" id="sidebar">
+    <div class="sb-logo">سَ<span>وقلي</span></div>
+    <nav class="sb-nav">
+      <div class="sb-item active" onclick="switchTab('home',this)"><span class="sb-ico">🏠</span>الرئيسية</div>
+      <div class="sb-item" onclick="switchTab('projects',this)"><span class="sb-ico">📁</span>مشاريعي</div>
+      <div class="sb-item" onclick="goPage('services');initServicesPage()"><span class="sb-ico">⚡</span>الخدمات</div>
+      <div class="sb-item" onclick="switchTab('ideas',this)"><span class="sb-ico">💡</span>أفكار المحتوى</div>
+      <div class="sb-item" onclick="switchTab('campaigns',this)"><span class="sb-ico">🎯</span>حملاتي</div>
+      <div class="sb-item" onclick="switchTab('results',this)"><span class="sb-ico">📊</span>نتائجي</div>
+      <div class="sb-item" onclick="switchTab('tools',this)"><span class="sb-ico">🛠️</span>أدوات التسويق</div>
+      <div class="sb-item" onclick="switchTab('settings',this)"><span class="sb-ico">⚙️</span>الإعدادات</div>
+    </nav>
+    <div class="sb-footer">
+      <div class="sb-user">
+        <div class="sb-avatar">أ</div>
+        <div>
+          <div class="sb-name">أحمد محمد</div>
+          <div class="sb-plan">الخطة المجانية</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dashboard Content -->
+  <div class="dash-content">
+    <div class="dash-topbar">
+      <div class="dash-greeting">أهلاً <span>أحمد</span> 👋</div>
+      <div class="dash-search">
+        <span>🔍</span>
+        <input id="dash-search-input" placeholder="ابحث عن خدمة أو فكرة..." oninput="handleDashSearch(this.value)" onkeydown="if(event.key==='Enter')handleDashSearch(this.value)"/>
+        <span id="search-clear" onclick="clearDashSearch()" style="cursor:pointer;display:none;color:var(--brown3)">✕</span>
+      </div>
+      <button class="btn-new-project" onclick="goPage('services');initServicesPage()">+ مشروع جديد</button>
+    </div>
+
+    <!-- HOME TAB -->
+    <div id="tab-home" class="tab-c active">
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="stat-card-num">12</div>
+          <div class="stat-card-lbl">أفكار تم توليدها</div>
+          <div class="stat-card-change">+3 اليوم</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-num">3</div>
+          <div class="stat-card-lbl">خطط تسويق</div>
+          <div class="stat-card-change">+1 هذا الأسبوع</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-num">5</div>
+          <div class="stat-card-lbl">سكريبتات فيديو</div>
+          <div class="stat-card-change">جاهزة للنشر</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-num">2</div>
+          <div class="stat-card-lbl">حملات نشطة</div>
+          <div class="stat-card-change">+نتائج ممتازة</div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;flex-wrap:wrap;">
+        <div class="dash-card" style="min-width:280px">
+          <div class="dash-card-title">⚡ إجراءات سريعة</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+            <button style="padding:14px;border-radius:12px;background:var(--cream);border:1.5px solid rgba(200,169,126,.2);cursor:pointer;font-family:'Cairo',sans-serif;font-size:12px;font-weight:700;color:var(--brown);transition:all .2s;" onclick="startServiceFlow('restaurant')" onmouseover="this.style.borderColor='var(--gold)'" onmouseout="this.style.borderColor='rgba(200,169,126,.2)'">🍔 مطاعم</button>
+            <button style="padding:14px;border-radius:12px;background:var(--cream);border:1.5px solid rgba(200,169,126,.2);cursor:pointer;font-family:'Cairo',sans-serif;font-size:12px;font-weight:700;color:var(--brown);transition:all .2s;" onclick="startServiceFlow('fashion')" onmouseover="this.style.borderColor='var(--gold)'" onmouseout="this.style.borderColor='rgba(200,169,126,.2)'">👕 ملابس</button>
+            <button style="padding:14px;border-radius:12px;background:var(--cream);border:1.5px solid rgba(200,169,126,.2);cursor:pointer;font-family:'Cairo',sans-serif;font-size:12px;font-weight:700;color:var(--brown);transition:all .2s;" onclick="startServiceFlow('tech')" onmouseover="this.style.borderColor='var(--gold)'" onmouseout="this.style.borderColor='rgba(200,169,126,.2)'">💻 تقنية</button>
+            <button style="padding:14px;border-radius:12px;background:var(--cream);border:1.5px solid rgba(200,169,126,.2);cursor:pointer;font-family:'Cairo',sans-serif;font-size:12px;font-weight:700;color:var(--brown);transition:all .2s;" onclick="startServiceFlow('beauty')" onmouseover="this.style.borderColor='var(--gold)'" onmouseout="this.style.borderColor='rgba(200,169,126,.2)'">🧴 تجميل</button>
+          </div>
+        </div>
+        <div class="dash-card" style="min-width:280px">
+          <div class="dash-card-title">📋 آخر الأنشطة</div>
+          <div class="li-item">
+            <div class="li-ico">📸</div>
+            <div class="li-info"><div class="li-name">خطة محتوى موسمية</div><div class="li-sub">منذ ساعتين</div></div>
+            <span class="badge badge-green">جديد</span>
+          </div>
+          <div class="li-item">
+            <div class="li-ico">🎬</div>
+            <div class="li-info"><div class="li-name">سكريبت فيديو مطعم</div><div class="li-sub">أمس</div></div>
+            <span class="badge badge-gold">مكتمل</span>
+          </div>
+          <div class="li-item">
+            <div class="li-ico">📋</div>
+            <div class="li-info"><div class="li-name">خطة تسويق شهرية</div><div class="li-sub">منذ 3 أيام</div></div>
+            <span class="badge badge-blue">جاهز</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- IDEAS TAB -->
+    <div id="tab-ideas" class="tab-c">
+      <!-- Header -->
+      <div style="margin-bottom:20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+        <div>
+          <h2 style="font-size:20px;font-weight:900;color:var(--brown);margin-bottom:4px;">📚 مكتبة التسويق</h2>
+          <p style="font-size:13px;color:var(--brown3);">مئات الأفكار التسويقية الجاهزة — اختار مجالك وطبّق فوراً</p>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center;">
+          <input id="lib-search" oninput="filterLibrary(this.value)" placeholder="🔍 ابحث في المكتبة..." style="padding:8px 14px;border-radius:14px;border:1.5px solid rgba(200,169,126,.25);font-family:'Cairo',sans-serif;font-size:12px;outline:none;background:white;color:var(--brown);width:180px"/>
+        </div>
+      </div>
+
+      <!-- فلاتر المجالات -->
+      <div id="lib-filters" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px;">
+        <button class="lib-filter active" onclick="filterByDomain('all',this)">🌟 الكل</button>
+        <button class="lib-filter" onclick="filterByDomain('restaurant',this)">🍔 مطاعم</button>
+        <button class="lib-filter" onclick="filterByDomain('fashion',this)">👕 موضة</button>
+        <button class="lib-filter" onclick="filterByDomain('ecommerce',this)">🛒 تجارة</button>
+        <button class="lib-filter" onclick="filterByDomain('beauty',this)">💄 تجميل</button>
+        <button class="lib-filter" onclick="filterByDomain('tech',this)">💻 تقنية</button>
+        <button class="lib-filter" onclick="filterByDomain('services',this)">🏢 خدمات</button>
+        <button class="lib-filter" onclick="filterByDomain('general',this)">📣 تسويق عام</button>
+      </div>
+
+      <!-- فلاتر النوع -->
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px;">
+        <button class="lib-type active" onclick="filterByType('all',this)">كل الأنواع</button>
+        <button class="lib-type" onclick="filterByType('content',this)">📱 محتوى</button>
+        <button class="lib-type" onclick="filterByType('video',this)">🎬 فيديو</button>
+        <button class="lib-type" onclick="filterByType('campaign',this)">📢 حملة</button>
+        <button class="lib-type" onclick="filterByType('hook',this)">🪝 Hook</button>
+        <button class="lib-type" onclick="filterByType('tip',this)">💡 نصيحة</button>
+      </div>
+
+      <!-- عداد النتائج -->
+      <div id="lib-count" style="font-size:12px;color:var(--brown3);margin-bottom:16px;"></div>
+
+      <!-- الكروت -->
+      <div id="lib-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;"></div>
+
+    <div id="tab-campaigns" class="tab-c">
+      <div style="margin-bottom:20px;">
+        <h2 style="font-size:20px;font-weight:900;color:var(--brown);margin-bottom:4px;">🎯 الحملات</h2>
+        <p style="font-size:13px;color:var(--brown3);">إدارة حملاتك التسويقية</p>
+      </div>
+      <div class="dash-card">
+        <div class="dash-card-title">الحملات الحالية</div>
+        <div class="li-item">
+          <div class="li-ico">🚀</div>
+          <div class="li-info"><div class="li-name">حملة الافتتاح</div><div class="li-sub">الوصول: 12,450 شخص</div></div>
+          <span class="badge badge-green">نشطة</span>
+        </div>
+        <div class="li-item">
+          <div class="li-ico">🌙</div>
+          <div class="li-info"><div class="li-name">حملات موسمية</div><div class="li-sub">تبدأ الشهر القادم</div></div>
+          <span class="badge badge-gold">قادمة</span>
+        </div>
+        <div style="margin-top:16px;">
+          <button class="btn-detail" onclick="startServiceFlow('restaurant')">+ إنشاء حملة جديدة</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- RESULTS TAB -->
+    <div id="tab-results" class="tab-c">
+      <div style="margin-bottom:20px;">
+        <h2 style="font-size:20px;font-weight:900;color:var(--brown);margin-bottom:4px;">📊 نتائجي</h2>
+        <p style="font-size:13px;color:var(--brown3);">آخر النتائج التي تم توليدها</p>
+      </div>
+      <div class="dash-card">
+        <div class="dash-card-title">النتائج المحفوظة</div>
+        <div style="text-align:center;padding:32px;color:var(--brown3);font-size:13px;">
+          <div style="font-size:36px;margin-bottom:12px;">📋</div>
+          لا توجد نتائج محفوظة بعد<br/>
+          <button class="btn-detail" style="margin-top:16px" onclick="goPage('services');initServicesPage()">ابدأ مشروع جديد</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TOOLS TAB -->
+    <div id="tab-tools" class="tab-c">
+      <div style="margin-bottom:20px;">
+        <h2 style="font-size:20px;font-weight:900;color:var(--brown);margin-bottom:4px;">🛠️ أدوات التسويق</h2>
+        <p style="font-size:13px;color:var(--brown3);">كل الأدوات في مكان واحد</p>
+      </div>
+      <div class="services-grid">
+        <div class="svc-card" onclick="startServiceFlow('restaurant')">
+          <div class="svc-ico">💡</div>
+          <div class="svc-nm">مولد أفكار المحتوى</div>
+          <div class="svc-desc">توليد 30 فكرة محتوى جاهزة</div>
+          <button class="btn-detail" style="margin-top:12px">تفاصيل ←</button>
+        </div>
+        <div class="svc-card" onclick="startServiceFlow('restaurant')">
+          <div class="svc-ico">🎬</div>
+          <div class="svc-nm">مولد سكريبتات الفيديو</div>
+          <div class="svc-desc">سكريبت كامل مع مشاهد ولقطات</div>
+          <button class="btn-detail" style="margin-top:12px">تفاصيل ←</button>
+        </div>
+        <div class="svc-card" onclick="startServiceFlow('restaurant')">
+          <div class="svc-ico">📋</div>
+          <div class="svc-nm">مولد خطة التسويق</div>
+          <div class="svc-desc">خطة تسويق شهرية كاملة</div>
+          <button class="btn-detail" style="margin-top:12px">تفاصيل ←</button>
+        </div>
+        <div class="svc-card" onclick="startServiceFlow('restaurant')">
+          <div class="svc-ico">🎯</div>
+          <div class="svc-nm">مولد الحملات الإعلانية</div>
+          <div class="svc-desc">حملات TikTok وInstagram</div>
+          <button class="btn-detail" style="margin-top:12px">تفاصيل ←</button>
+        </div>
+        <div class="svc-card" onclick="switchTab('calendar',this)">
+          <div class="svc-ico">📅</div>
+          <div class="svc-nm">Content Calendar</div>
+          <div class="svc-desc">جدول نشر شهري ذكي</div>
+          <button class="btn-detail" style="margin-top:12px;background:rgba(200,169,126,.2);color:var(--brown2)">⭐ Pro</button>
+        </div>
+        <div class="svc-card">
+          <div class="svc-ico">🔍</div>
+          <div class="svc-nm">تحليل المنافسين</div>
+          <div class="svc-desc">تحليل احترافي للمنافسين</div>
+          <button class="btn-detail" style="margin-top:12px;background:rgba(200,169,126,.2);color:var(--brown2)">⭐ Pro</button>
+        </div>
+        <div class="svc-card" onclick="openHookGenerator()">
+          <div class="svc-ico">🪝</div>
+          <div class="svc-nm">Hook Generator</div>
+          <div class="svc-desc">أقوى جمل افتتاحية لفيديوهاتك</div>
+          <button class="btn-detail" style="margin-top:12px">توليد ←</button>
+        </div>
+        <div class="svc-card" onclick="openHashtagGenerator()">
+          <div class="svc-ico">#️⃣</div>
+          <div class="svc-nm">Hashtag Generator</div>
+          <div class="svc-desc">أفضل هاشتاجات لمجالك</div>
+          <button class="btn-detail" style="margin-top:12px">توليد ←</button>
+        </div>
+        <div class="svc-card" onclick="openPostDesignGenerator()">
+          <div class="svc-ico">🎨</div>
+          <div class="svc-nm">Post Design Ideas</div>
+          <div class="svc-desc">أفكار تصميم بوستات احترافية</div>
+          <button class="btn-detail" style="margin-top:12px">توليد ←</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROJECTS TAB -->
+    <div id="tab-projects" class="tab-c">
+      <div style="margin-bottom:20px;">
+        <h2 style="font-size:20px;font-weight:900;color:var(--brown);margin-bottom:4px;">📁 مشاريعي</h2>
+        <p style="font-size:13px;color:var(--brown3);">مشاريعك المحفوظة</p>
+      </div>
+      <div class="dash-card">
+        <div style="text-align:center;padding:32px;color:var(--brown3);font-size:13px;">
+          <div style="font-size:36px;margin-bottom:12px;">📁</div>
+          لا توجد مشاريع محفوظة بعد<br/>
+          <button class="btn-detail" style="margin-top:16px" onclick="goPage('services');initServicesPage()">+ أضف مشروع جديد</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- CALENDAR TAB -->
+    <div id="tab-calendar" class="tab-c">
+      <div style="margin-bottom:20px;">
+        <h2 style="font-size:20px;font-weight:900;color:var(--brown);margin-bottom:4px;">📅 Content Calendar</h2>
+        <p style="font-size:13px;color:var(--brown3);">جدول نشر شهري ذكي</p>
+      </div>
+      <div class="cal-locked">
+        <div class="cal-locked-ico">🔒</div>
+        <div class="cal-locked-title">ميزة Content Calendar</div>
+        <div class="cal-locked-sub">هذه الميزة متاحة للمشتركين في الخطة المدفوعة فقط.<br/>اشترك الآن للحصول على جدول نشر شهري ذكي ومخصص لمشروعك.</div>
+        <button class="btn-detail" onclick="goPage('landing');sTo('pricing')">⭐ اشترك في Pro</button>
+      </div>
+    </div>
+
+    <!-- SETTINGS TAB -->
+    <div id="tab-settings" class="tab-c">
+      <div style="margin-bottom:20px;">
+        <h2 style="font-size:20px;font-weight:900;color:var(--brown);margin-bottom:4px;">⚙️ الإعدادات</h2>
+      </div>
+      <div class="dash-card">
+        <div class="dash-card-title">بيانات الحساب</div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:20px;">
+          <div class="form-group">
+            <label class="form-label">الاسم</label>
+            <input class="form-inp" id="settings-name" value="أحمد محمد"/>
+          </div>
+          <div class="form-group">
+            <label class="form-label">البريد الإلكتروني</label>
+            <input class="form-inp" id="settings-email" type="email"/>
+          </div>
+        </div>
+        <div id="saved-project-info" style="display:none;padding:14px;background:var(--cream);border-radius:12px;margin-bottom:16px;font-size:13px;color:var(--brown3);">
+          <strong style="color:var(--brown)">المشروع المحفوظ:</strong>
+          <span id="saved-proj-details"></span>
+        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+          <button class="btn-detail" onclick="saveSettings()">حفظ التغييرات</button>
+          <button class="btn-sm" onclick="clearSavedProject()">🗑️ مسح بيانات المشروع</button>
+          <button class="btn-sm" onclick="logout()">← تسجيل الخروج</button>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end dash-content -->
+</div><!-- end page-dashboard -->
+
+<!-- ============================================================
+     SERVICES PAGE (WIZARD)
+     ============================================================ -->
+<div id="page-services" class="page">
+  <div class="svc-page-wrap">
+    <button class="btn-back" id="svc-back-btn" onclick="handleServicesBack()">← العودة</button>
+
+    <!-- Wizard Bar -->
+    <div class="wizard-bar">
+      <div class="wz-step active" id="wz1" onclick="wzGoStep(1)">
+        <div class="wz-num">1</div>
+        <div class="wz-label">المجال</div>
+      </div>
+      <div class="wz-sep">›</div>
+      <div class="wz-step" id="wz2" onclick="wzGoStep(2)">
+        <div class="wz-num">2</div>
+        <div class="wz-label">الخدمة</div>
+      </div>
+      <div class="wz-sep">›</div>
+      <div class="wz-step" id="wz3" onclick="wzGoStep(3)">
+        <div class="wz-num">3</div>
+        <div class="wz-label">بيانات المشروع</div>
+      </div>
+      <div class="wz-sep">›</div>
+      <div class="wz-step" id="wz4" onclick="wzGoStep(4)">
+        <div class="wz-num">4</div>
+        <div class="wz-label">النتيجة</div>
+      </div>
+    </div>
+
+    <!-- Step 1: Domain -->
+    <div class="svc-step active" id="svc-step1">
+      <div class="svc-step-title">اختر مجال مشروعك</div>
+      <div class="svc-step-sub">الخدمات هتتغير حسب المجال اللي تختاره</div>
+      <div class="pick-grid">
+        <div class="pick-card" onclick="selectDomain('restaurant',this)">
+          <div class="pick-ico">🍔</div>
+          <div class="pick-nm">مطاعم</div>
+          <div class="pick-desc">أكل، مقاهي، كافيهات</div>
+        </div>
+        <div class="pick-card" onclick="selectDomain('fashion',this)">
+          <div class="pick-ico">👕</div>
+          <div class="pick-nm">ملابس</div>
+          <div class="pick-desc">ملابس، موضة، إكسسوارات</div>
+        </div>
+        <div class="pick-card" onclick="selectDomain('retail',this)">
+          <div class="pick-ico">🏪</div>
+          <div class="pick-nm">مشاريع تجارية</div>
+          <div class="pick-desc">متاجر، بيع بالتجزئة</div>
+        </div>
+        <div class="pick-card" onclick="selectDomain('beauty',this)">
+          <div class="pick-ico">🧴</div>
+          <div class="pick-nm">تجميل</div>
+          <div class="pick-desc">صالونات، عناية، مكياج</div>
+        </div>
+        <div class="pick-card" onclick="selectDomain('tech',this)">
+          <div class="pick-ico">💻</div>
+          <div class="pick-nm">تقنية</div>
+          <div class="pick-desc">تطبيقات، مواقع، تقنية</div>
+        </div>
+        <div class="pick-card" onclick="selectDomain('services',this)">
+          <div class="pick-ico">🏥</div>
+          <div class="pick-nm">خدمات مهنية</div>
+          <div class="pick-desc">طب، تعليم، استشارات</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 2: Service -->
+    <div class="svc-step" id="svc-step2">
+      <div class="svc-step-title" id="step2-title">اختر الخدمة</div>
+      <div class="svc-step-sub" id="step2-sub">خدمات مخصصة لمجالك</div>
+      <div class="svc-cards-grid" id="svc-cards-container"></div>
+    </div>
+
+    <!-- Step 3: Project Data -->
+    <div class="svc-step" id="svc-step3">
+      <div class="svc-step-title" id="step3-title">بيانات المشروع</div>
+      <div class="svc-step-sub" id="step3-sub">أدخل معلومات مشروعك لنتيجة مخصصة</div>
+      <div id="step3-content"></div>
+    </div>
+
+    <!-- Step 4: Result -->
+    <div class="svc-step" id="svc-step4">
+      <div class="svc-step-title">🎉 النتيجة</div>
+      <div class="svc-step-sub">تم توليد النتيجة بواسطة AI</div>
+      <div class="result-box">
+        <div class="result-title"><span id="result-icon">✨</span> <span id="result-title-text">النتيجة</span></div>
+        <div class="result-text" id="result-text"></div>
+        <div class="result-actions">
+          <button class="btn-act btn-act-copy" onclick="copyResult()">📋 نسخ</button>
+          <button class="btn-act btn-act-calendar" onclick="addToCalendar()">📅 Calendar</button>
+          <button class="btn-act btn-act-download" onclick="downloadResult()">⬇️ تحميل</button>
+          <button class="btn-act btn-act-new" onclick="initServicesPage()">🔄 طلب جديد</button>
+        </div>
+        <div class="upsell-box">
+          <div class="upsell-title">🚀 هل تريد نتائج أفضل؟</div>
+          <div class="upsell-sub">الخطة المدفوعة تتيح لك: نتائج غير محدودة، تحميل PDF، Content Calendar، ومتابعة خبير تسويق.</div>
+          <div class="upsell-btns">
+            <button class="btn-sm btn-sm-primary" onclick="goPage('landing');sTo('pricing')">⭐ ترقية للـ Pro</button>
+            <button class="btn-sm" onclick="goPage('landing');sTo('pricing')">عرض الباقات</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ============================================================
+     CHATBOT
+     ============================================================ -->
+<div class="chat-bubble" onclick="toggleChat()">💬</div>
+<div class="chat-window" id="chat-window">
+  <div class="chat-hd">
+    <div class="chat-hd-info">
+      <div class="chat-hd-avatar">🤖</div>
+      <div>
+        <div class="chat-hd-name">مساعد سَوقلي AI</div>
+        <div class="chat-hd-status">متصل الآن ✅</div>
+      </div>
+    </div>
+    <button class="chat-hd-close" onclick="toggleChat()">✕</button>
+  </div>
+  <div class="chat-msgs" id="chat-msgs">
+    <div class="msg bot">مرحباً! 👋 أنا مساعد سَوقلي الذكي. اسألني عن أي شيء — أفكار محتوى، خطط تسويق، أو أسئلة عن مشروعك!</div>
+  </div>
+  <div class="chat-quick">
+    <button class="quick-btn" onclick="quickAsk('ما هي أسعار سَوقلي؟')">💰 الأسعار</button>
+    <button class="quick-btn" onclick="quickAsk('أفكار محتوى لمطعم')">🍔 مطاعم</button>
+    <button class="quick-btn" onclick="quickAsk('أفكار محتوى لمتجر ملابس على TikTok')">👗 ملابس AI</button>
+    <button class="quick-btn" onclick="quickAsk('كيف أبدأ حملة إعلانية؟')">🎯 حملات</button>
+    <button class="quick-btn" onclick="quickAsk('ما هي Content Calendar؟')">📅 الجدوى</button>
+  </div>
+  <div class="chat-inp-wrap">
+    <input class="chat-inp" id="chat-inp" placeholder="اكتب سؤالك..." onkeydown="if(event.key==='Enter')sendChat()"/>
+    <button class="chat-send" onclick="sendChat()">←</button>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- TOOLS MODAL -->
+<div id="tools-modal" style="display:none"></div>
+
+<!-- ============================================================
+     JAVASCRIPT
+     ============================================================ -->
+<script>
+/* =====================================================
+   SUPABASE CONFIG
+   ===================================================== */
+const SUPABASE_URL = 'https://kkcidsunsqftnpzdnwba.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtrY2lkc3Vuc3FmdG5wemRud2JhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMyNTU1MjYsImV4cCI6MjA4ODgzMTUyNn0.JYE2LbsvNmK9gU4ty4MKRFjs4zrGtH-QaFg26r6ruqs';
+const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+// المستخدم الحالي
+let currentUser = null;
+
+// تحميل المستخدم عند فتح الموقع
+async function loadCurrentUser() {
+  try {
+    const { data: { session } } = await _supabase.auth.getSession();
+    if (session) {
+      currentUser = session.user;
+      return true;
+    }
+  } catch(e) {}
+  return false;
+}
+
+/* =====================================================
+   STATE
+   ===================================================== */
+let currentProjectKey = 'restaurant';
+const state = {
+  domain: null,
+  domainName: '',
+  serviceType: null,
+  serviceName: '',
+  serviceIcon: '',
+  projectName: '',
+  projectType: '',
+  budget: '',
+  budgetCurrency: 'EGP',
+  audience: '',
+  description: '',
+  prices: '',
+  videoType: null,
+  scriptType: null,
+  platform: null,
+  contentType: null,
+  currentStep: 1
+};
+
+/* =====================================================
+   DOMAIN SERVICES DATA
+   ===================================================== */
+const domainServices = {
+  restaurant: {
+    name: 'مطاعم', icon: '🍔',
+    services: [
+      {ico:'💡', nm:'أفكار محتوى للمطاعم', desc:'أفكار منشورات وفيديوهات لمطعمك', type:'content', tag:'🔥 شائع'},
+      {ico:'📋', nm:'خطة تسويق مطعم', desc:'خطة تسويق شهرية متكاملة', type:'plan', tag:'📈 نمو'},
+      {ico:'🎬', nm:'سكريبت فيديو أكل', desc:'سكريبت ريلز وتيك توك لمطعمك', type:'video', tag:'🎥 فيديو'},
+      {ico:'🏷️', nm:'حملات عروض المطعم', desc:'حملات خصومات وعروض الأطباق', type:'ads', tag:'💰 عروض'},
+      {ico:'🎵', nm:'حملة TikTok مطعم', desc:'حملة ترويجية مخصصة لتيك توك', type:'ads', tag:'🎵 TikTok'},
+      {ico:'📸', nm:'حملة Instagram مطعم', desc:'حملة إعلانية على إنستجرام', type:'ads', tag:'📸 Instagram'},
+    ]
+  },
+  fashion: {
+    name: 'ملابس', icon: '👕',
+    services: [
+      {ico:'✨', nm:'أفكار محتوى موضة', desc:'أفكار Try-On وOutfit videos', type:'content', tag:'💫 ترند'},
+      {ico:'📋', nm:'خطة تسويق متجر ملابس', desc:'خطة نمو على السوشيال ميديا', type:'plan', tag:'📈 نمو'},
+      {ico:'🎬', nm:'سكريبت فيديو منتجات', desc:'سكريبت عرض المنتجات والـ Try-On', type:'video', tag:'🎥 فيديو'},
+      {ico:'🛍️', nm:'حملات خصومات الملابس', desc:'سيزونال سيل وتصفية المخزون', type:'ads', tag:'🛍️ خصومات'},
+      {ico:'🎵', nm:'حملة TikTok موضة', desc:'Try-On Trends على تيك توك', type:'ads', tag:'🎵 TikTok'},
+      {ico:'📸', nm:'حملة Instagram موضة', desc:'إعلانات Reels وStories للملابس', type:'ads', tag:'📸 Instagram'},
+    ]
+  },
+  retail: {
+    name: 'مشاريع تجارية', icon: '🏪',
+    services: [
+      {ico:'💡', nm:'أفكار محتوى للمتجر', desc:'أفكار منشورات لمتجرك ومنتجاتك', type:'content', tag:'🔥 شائع'},
+      {ico:'📋', nm:'خطة تسويق المتجر', desc:'خطة تسويق لزيادة مبيعات متجرك', type:'plan', tag:'📈 نمو'},
+      {ico:'🎬', nm:'سكريبت عرض منتجات', desc:'فيديو احترافي لعرض منتجاتك', type:'video', tag:'🎥 فيديو'},
+      {ico:'🏷️', nm:'حملات ترويج المتجر', desc:'حملات على TikTok وInstagram', type:'ads', tag:'💰 عروض'},
+    ]
+  },
+  beauty: {
+    name: 'تجميل', icon: '🧴',
+    services: [
+      {ico:'💄', nm:'أفكار محتوى تجميل', desc:'Before/After وتيوتوريالز', type:'content', tag:'✨ جمال'},
+      {ico:'📋', nm:'خطة تسويق صالون', desc:'خطة نمو لصالونك ومنتجاتك', type:'plan', tag:'📈 نمو'},
+      {ico:'🎬', nm:'سكريبت فيديو تجميل', desc:'تيوتوريال ومراجعة منتجات', type:'video', tag:'🎥 فيديو'},
+      {ico:'🤝', nm:'استراتيجية المؤثرين', desc:'تعاون مع مؤثرين التجميل', type:'ads', tag:'🤝 مؤثرين'},
+    ]
+  },
+  tech: {
+    name: 'تقنية', icon: '💻',
+    services: [
+      {ico:'💡', nm:'أفكار محتوى تقني', desc:'أفكار للتطبيقات والخدمات التقنية', type:'content', tag:'💻 تقنية'},
+      {ico:'📋', nm:'خطة تسويق B2B/B2C', desc:'خطة تسويق للمنتجات التقنية', type:'plan', tag:'📈 نمو'},
+      {ico:'🎬', nm:'سكريبت Demo المنتج', desc:'فيديو عرض منتجك التقني', type:'video', tag:'🎥 فيديو'},
+      {ico:'🎯', nm:'حملة LinkedIn وTwitter', desc:'حملات للجمهور المهني والتقني', type:'ads', tag:'💼 B2B'},
+    ]
+  },
+  services: {
+    name: 'خدمات مهنية', icon: '🏥',
+    services: [
+      {ico:'💡', nm:'أفكار محتوى مهني', desc:'أفكار لبناء السمعة والثقة', type:'content', tag:'🏅 مهني'},
+      {ico:'📋', nm:'خطة تسويق الخدمات', desc:'خطة تسويق لخدمتك المهنية', type:'plan', tag:'📈 نمو'},
+      {ico:'🎬', nm:'سكريبت فيديو تعريفي', desc:'فيديو تعريف بخدمتك المهنية', type:'video', tag:'🎥 فيديو'},
+      {ico:'🌐', nm:'استراتيجية الانتشار', desc:'حضور رقمي قوي لعملك المهني', type:'ads', tag:'🌐 انتشار'},
+    ]
+  }
+};
+
+/* =====================================================
+   PAGE NAVIGATION
+   ===================================================== */
+function goPage(name) {
+  document.querySelectorAll('.page').forEach(p => {
+    p.classList.remove('active');
+    p.style.display = 'none';
+  });
+  const pg = document.getElementById('page-' + name);
+  if (pg) {
+    pg.classList.add('active');
+    // dashboard needs flex, others need block
+    pg.style.display = (name === 'dashboard') ? 'flex' : 'block';
+  }
+  const nav = document.getElementById('main-nav');
+  nav.style.display = name === 'login' ? 'none' : 'flex';
+  window.scrollTo(0, 0);
+  if (name === 'login') setTimeout(initLoginPage, 300);
+  if (name === 'dashboard') setTimeout(loadSavedProjectToSettings, 300);
+  history.pushState({page: name}, '', '#' + name);
+}
+
+window.onpopstate = function(e) {
+  if (e.state && e.state.page) {
+    goPage(e.state.page);
+  } else {
+    goPage('landing');
+  }
+};
+
+function sTo(id) {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({behavior: 'smooth'});
+}
+
+/* =====================================================
+   SERVICES WIZARD
+   ===================================================== */
+function initServicesPage() {
+  state.domain = null;
+  state.serviceType = null;
+  state.currentStep = 1;
+  wzGoStep(1);
+  document.querySelectorAll('.pick-card').forEach(c => c.classList.remove('selected'));
+}
+
+function handleServicesBack() {
+  if (state.currentStep <= 1) {
+    // لو جاي من الداشبورد يرجعله، لو من الـ landing يرجعله
+    const prevPage = sessionStorage.getItem('prev_page') || 'landing';
+    goPage(prevPage);
+  } else {
+    wzGoStep(state.currentStep - 1);
+  }
+}
+
+function wzGoStep(n) {
+  if (n > state.currentStep + 1) return;
+  state.currentStep = n;
+  for (let i = 1; i <= 4; i++) {
+    const wz = document.getElementById('wz' + i);
+    const step = document.getElementById('svc-step' + i);
+    if (!wz || !step) continue;
+    wz.classList.remove('active', 'done');
+    step.classList.remove('active');
+    if (i < n) wz.classList.add('done');
+    else if (i === n) { wz.classList.add('active'); step.classList.add('active'); }
+  }
+}
+
+function selectDomain(key, el) {
+  document.querySelectorAll('.pick-card').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  state.domain = key;
+  currentProjectKey = key;
+  const d = domainServices[key];
+  state.domainName = d.name;
+  // Build step 2
+  const container = document.getElementById('svc-cards-container');
+  container.innerHTML = d.services.map((s, i) =>
+    `<div class="svc-card" onclick="selectService('${s.type}','${s.nm}','${s.ico}',${i})">
+      <div class="svc-ico">${s.ico}</div>
+      <div class="svc-nm">${s.nm}</div>
+      <div class="svc-desc">${s.desc}</div>
+      <span class="svc-tag">${s.tag}</span>
+    </div>`
+  ).join('');
+  document.getElementById('step2-title').textContent = 'اختر الخدمة — ' + d.name;
+  document.getElementById('step2-sub').textContent = 'خدمات مخصصة لمجال ' + d.name;
+  setTimeout(() => wzGoStep(2), 300);
+}
+
+function selectService(type, name, icon, idx) {
+  state.serviceType = type;
+  state.serviceName = name;
+  state.serviceIcon = icon;
+  buildStep3(type);
+  wzGoStep(3);
+}
+
+function buildStep3(type) {
+  const t3 = document.getElementById('step3-title');
+  const s3 = document.getElementById('step3-sub');
+  const c3 = document.getElementById('step3-content');
+  t3.textContent = state.serviceName;
+  s3.textContent = 'أدخل بيانات مشروعك للحصول على نتيجة مخصصة';
+
+  let extraSteps = '';
+  if (type === 'video') {
+    extraSteps = `
+    <div style="margin-bottom:24px">
+      <div style="font-size:14px;font-weight:800;color:var(--brown);margin-bottom:12px">نوع الفيديو</div>
+      <div class="type-grid" id="video-type-grid">
+        <div class="type-card" onclick="selectTypeCard('video-type-grid',this,'videoType','ad')"><div class="type-ico">📢</div><div class="type-nm">فيديو إعلان</div></div>
+        <div class="type-card" onclick="selectTypeCard('video-type-grid',this,'videoType','social')"><div class="type-ico">📱</div><div class="type-nm">فيديو سوشيال</div></div>
+        <div class="type-card" onclick="selectTypeCard('video-type-grid',this,'videoType','tutorial')"><div class="type-ico">🎓</div><div class="type-nm">فيديو تعليمي</div></div>
+        <div class="type-card" onclick="selectTypeCard('video-type-grid',this,'videoType','promo')"><div class="type-ico">🎉</div><div class="type-nm">فيديو ترويجي</div></div>
+      </div>
+      <div style="font-size:14px;font-weight:800;color:var(--brown);margin-bottom:12px">نوع السكريبت</div>
+      <div class="type-grid" id="script-type-grid">
+        <div class="type-card" onclick="selectTypeCard('script-type-grid',this,'scriptType','story')"><div class="type-ico">📖</div><div class="type-nm">سكريبت قصة</div></div>
+        <div class="type-card" onclick="selectTypeCard('script-type-grid',this,'scriptType','ad')"><div class="type-ico">📢</div><div class="type-nm">سكريبت إعلان</div></div>
+        <div class="type-card" onclick="selectTypeCard('script-type-grid',this,'scriptType','tutorial')"><div class="type-ico">🎓</div><div class="type-nm">سكريبت تعليمي</div></div>
+        <div class="type-card" onclick="selectTypeCard('script-type-grid',this,'scriptType','review')"><div class="type-ico">⭐</div><div class="type-nm">مراجعة منتج</div></div>
+      </div>
+    </div>`;
+  } else if (type === 'content') {
+    extraSteps = `
+    <div style="margin-bottom:24px">
+      <div style="font-size:14px;font-weight:800;color:var(--brown);margin-bottom:12px">المنصة</div>
+      <div class="type-grid" id="platform-grid">
+        <div class="type-card" onclick="selectTypeCard('platform-grid',this,'platform','instagram')"><div class="type-ico">📸</div><div class="type-nm">Instagram</div></div>
+        <div class="type-card" onclick="selectTypeCard('platform-grid',this,'platform','tiktok')"><div class="type-ico">🎵</div><div class="type-nm">TikTok</div></div>
+        <div class="type-card" onclick="selectTypeCard('platform-grid',this,'platform','facebook')"><div class="type-ico">👥</div><div class="type-nm">Facebook</div></div>
+        <div class="type-card" onclick="selectTypeCard('platform-grid',this,'platform','youtube')"><div class="type-ico">▶️</div><div class="type-nm">YouTube</div></div>
+      </div>
+      <div style="font-size:14px;font-weight:800;color:var(--brown);margin-bottom:12px">نوع المحتوى</div>
+      <div class="type-grid" id="content-type-grid">
+        <div class="type-card" onclick="selectTypeCard('content-type-grid',this,'contentType','educational')"><div class="type-ico">🎓</div><div class="type-nm">محتوى تعليمي</div></div>
+        <div class="type-card" onclick="selectTypeCard('content-type-grid',this,'contentType','entertainment')"><div class="type-ico">🎉</div><div class="type-nm">محتوى ترفيهي</div></div>
+        <div class="type-card" onclick="selectTypeCard('content-type-grid',this,'contentType','promotional')"><div class="type-ico">🏷️</div><div class="type-nm">محتوى ترويجي</div></div>
+        <div class="type-card" onclick="selectTypeCard('content-type-grid',this,'contentType','story')"><div class="type-ico">📖</div><div class="type-nm">قصص العملاء</div></div>
+      </div>
+    </div>`;
+  }
+
+  c3.innerHTML = extraSteps + buildProjectForm();
+}
+
+function selectTypeCard(gridId, el, stateKey, val) {
+  document.querySelectorAll('#' + gridId + ' .type-card').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  state[stateKey] = val;
+}
+
+function buildProjectForm() {
+  const saved = getSavedProject();
+  return `
+  <div class="form-grid">
+    <div class="form-group">
+      <label class="form-label">اسم المشروع *</label>
+      <input class="form-inp" id="f-proj-name" placeholder="مثال: مطعم النخبة" value="${saved.projectName||''}"/>
+    </div>
+    <div class="form-group">
+      <label class="form-label">نوع المشروع</label>
+      <input class="form-inp" id="f-proj-type" placeholder="مثال: مطعم وجبات سريعة" value="${saved.projectType||''}"/>
+    </div>
+    <div class="form-group">
+      <label class="form-label">الجمهور المستهدف</label>
+      <input class="form-inp" id="f-audience" placeholder="مثال: شباب 18-30" value="${saved.audience||''}"/>
+    </div>
+    <div class="form-group">
+      <label class="form-label">الميزانية</label>
+      <div class="budget-row">
+        <input class="form-inp" id="f-budget" placeholder="مثال: 5000" value="${saved.budget||''}"/>
+        <select class="budget-currency" id="f-budget-currency">
+          <option value="EGP" ${saved.budgetCurrency==='EGP'?'selected':''}>ج.م EGP</option>
+          <option value="USD" ${saved.budgetCurrency==='USD'?'selected':''}>$ USD</option>
+          <option value="SAR" ${saved.budgetCurrency==='SAR'?'selected':''}>ر.س SAR</option>
+          <option value="AED" ${saved.budgetCurrency==='AED'?'selected':''}>د.إ AED</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group full">
+      <label class="form-label">أسعار المنتجات / الخدمات</label>
+      <input class="form-inp" id="f-prices" placeholder="مثال: وجبة كبيرة 150 ج.م" value="${saved.prices||''}"/>
+    </div>
+    <div class="form-group full">
+      <label class="form-label">وصف المشروع</label>
+      <textarea class="form-inp" id="f-description" rows="3" placeholder="اوصف مشروعك باختصار...">${saved.description||''}</textarea>
+    </div>
+  </div>
+  <button class="btn-cta-main" onclick="generateWithAI()">توليد بالـ AI 🚀</button>`;
+}
+
+function getSavedProject() {
+  try { return JSON.parse(localStorage.getItem('soqly_project') || '{}'); } catch(e) { return {}; }
+}
+
+function saveFormData() {
+  const data = {
+    projectName: document.getElementById('f-proj-name')?.value || '',
+    projectType: document.getElementById('f-proj-type')?.value || '',
+    audience: document.getElementById('f-audience')?.value || '',
+    budget: document.getElementById('f-budget')?.value || '',
+    budgetCurrency: document.getElementById('f-budget-currency')?.value || 'EGP',
+    prices: document.getElementById('f-prices')?.value || '',
+    description: document.getElementById('f-description')?.value || ''
+  };
+  Object.assign(state, data);
+  try { localStorage.setItem('soqly_project', JSON.stringify(data)); } catch(e) {}
+}
+
+function clearSavedProject() {
+  try { localStorage.removeItem('soqly_project'); } catch(e) {}
+  showToast('تم مسح بيانات المشروع 🗑️');
+}
+
+function loadSavedProjectToSettings() {
+  // Make sure home tab is active when dashboard opens
+  document.querySelectorAll('.tab-c').forEach(t => t.classList.remove('active'));
+  const homeTab = document.getElementById('tab-home');
+  if (homeTab) homeTab.classList.add('active');
+  document.querySelectorAll('.sb-item').forEach((el,i) => {
+    if (i === 0) el.classList.add('active'); else el.classList.remove('active');
+  });
+
+  const saved = getSavedProject();
+  const info = document.getElementById('saved-project-info');
+  const details = document.getElementById('saved-proj-details');
+  if (info && saved.projectName) {
+    info.style.display = 'block';
+    details.textContent = ' ' + saved.projectName + (saved.projectType ? ' — ' + saved.projectType : '');
+  }
+  const emailEl = document.getElementById('settings-email');
+  if (emailEl) {
+    try { emailEl.value = localStorage.getItem('soqly_remember_email') || ''; } catch(e) {}
+  }
+}
+
+/* =====================================================
+   AI GENERATION
+   ===================================================== */
+async function saveProjectToSupabase(projectData) {
+  if (!currentUser) return null;
+  try {
+    const { data, error } = await _supabase.from('projects').insert([{
+      user_id: currentUser.id,
+      name: projectData.projectName || 'مشروعي',
+      type: projectData.projectType || '',
+      domain: projectData.domain || '',
+      budget: projectData.budget || '',
+      budget_currency: projectData.budgetCurrency || 'EGP',
+      audience: projectData.audience || '',
+      description: projectData.description || '',
+      prices: projectData.prices || ''
+    }]).select().single();
+    return data;
+  } catch(e) { return null; }
+}
+
+async function saveResultToSupabase(resultText) {
+  if (!currentUser) return;
+  try {
+    await _supabase.from('results').insert([{
+      user_id: currentUser.id,
+      service_type: state.serviceType || '',
+      service_name: state.serviceName || '',
+      domain: state.domain || '',
+      result_text: resultText
+    }]);
+  } catch(e) {}
+}
+
+async function generateWithAI() {
+  saveFormData();
+  wzGoStep(4);
+  const resultText = document.getElementById('result-text');
+  const resultTitle = document.getElementById('result-title-text');
+  const resultIcon = document.getElementById('result-icon');
+  resultText.innerHTML = `<div class="ai-loading"><div class="ai-dots"><div class="ai-dot"></div><div class="ai-dot"></div><div class="ai-dot"></div></div><div class="ai-loading-text">جاري التوليد بالذكاء الاصطناعي... 🤖</div></div>`;
+  resultTitle.textContent = state.serviceName;
+  resultIcon.textContent = state.serviceIcon;
+
+  const prompt = buildPrompt();
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1500,
+        messages: [{role: 'user', content: prompt}]
+      })
+    });
+    const data = await res.json();
+    const text = data.content?.map(b => b.text || '').join('') || '';
+    showResult(text || generateLocalResult());
+  } catch(e) {
+    showResult(generateLocalResult());
+  }
+}
+
+function buildPrompt() {
+  const svc = state.serviceName;
+  const domain = state.domainName || 'مشروع';
+  const name = state.projectName || 'المشروع';
+  const type = state.projectType || domain;
+  const audience = state.audience || 'الجمهور المستهدف';
+  const budget = state.budget ? state.budget + ' ' + state.budgetCurrency : 'ميزانية مناسبة';
+  const desc = state.description || '';
+  const prices = state.prices || '';
+  const platform = state.platform || '';
+  const videoType = state.videoType || '';
+
+  return `أنت خبير تسويق رقمي لمنصة سَوقلي. أنشئ ${svc} باللغة العربية لـ:
+
+المشروع: ${name}
+المجال: ${type}
+الجمهور: ${audience}
+الميزانية: ${budget}
+${desc ? 'الوصف: ' + desc : ''}
+${prices ? 'الأسعار: ' + prices : ''}
+${platform ? 'المنصة: ' + platform : ''}
+${videoType ? 'نوع الفيديو: ' + videoType : ''}
+
+الشروط:
+- النتيجة احترافية وعملية وقابلة للتطبيق فوراً
+- مخصصة لمجال ${domain}
+- بالعربية الفصحى البسيطة
+- منظمة بشكل واضح مع عناوين
+- لا تستخدم markdown بشكل مفرط`;
+}
+
+function generateLocalResult() {
+  const name = state.projectName || 'مشروعك';
+  const domain = state.domainName || 'مشروع';
+  const svc = state.serviceType;
+  if (svc === 'content') {
+    const domainIdeas = contentIdeasByDomain[state.domain] || contentIdeasByDomain.restaurant;
+    const shuffled = [...domainIdeas].sort(() => 0.5 - Math.random());
+    const ideas30 = [...shuffled, ...shuffled, ...shuffled].slice(0, 15);
+    const platform = state.platform === 'tiktok' ? 'TikTok' : state.platform === 'instagram' ? 'Instagram' : state.platform === 'facebook' ? 'Facebook' : state.platform === 'youtube' ? 'YouTube' : 'Instagram و TikTok';
+    const w1 = ideas30.slice(0,5).map(function(idea,i){return (i+1)+'. '+idea;}).join('\n');
+    const w2 = ideas30.slice(5,10).map(function(idea,i){return (i+6)+'. '+idea;}).join('\n');
+    const w3 = ideas30.slice(10,15).map(function(idea,i){return (i+11)+'. '+idea;}).join('\n');
+    return '💡 30 فكرة محتوى لـ '+name+'\n\n'+
+      '📱 المنصة: '+platform+'\n\n'+
+      'الأسبوع الأول:\n'+w1+'\n\n'+
+      'الأسبوع الثاني:\n'+w2+'\n\n'+
+      'الأسبوع الثالث:\n'+w3+'\n\n'+
+      '📅 جدول النشر:\n'+
+      '• الأحد: فيديو منتج\n'+
+      '• الاثنين: نصيحة للعملاء\n'+
+      '• الثلاثاء: عرض خصم\n'+
+      '• الأربعاء: فيديو خلف الكواليس\n'+
+      '• الخميس: مراجعة عميل\n'+
+      '• الجمعة: محتوى ترفيهي\n'+
+      '• السبت: Story تفاعلي\n\n'+
+      '💡 نشر في أوقات الذروة: 7-9 مساءً';
+  }
+  if (svc === 'plan') {
+    return `📋 خطة التسويق الشهرية لـ ${name}
+
+🎯 الهدف: زيادة المبيعات وبناء قاعدة عملاء وفية
+
+الأسبوع 1 — بناء الوعي:
+• أنشئ محتوى تعريفي بمشروعك
+• فعّل حسابات التواصل الاجتماعي
+• انشر 5 بوستات تعريفية
+
+الأسبوع 2 — المحتوى الترويجي:
+• اعرض منتجاتك/خدماتك بشكل احترافي
+• شارك قصص نجاح العملاء
+• ابدأ حملة إعلانية بميزانية صغيرة
+
+الأسبوع 3 — التفاعل:
+• استجب لكل التعليقات والرسائل
+• نظّم مسابقة أو هدية
+• تعاون مع مؤثر في مجالك
+
+الأسبوع 4 — التقييم والنمو:
+• راجع الأرقام والنتائج
+• حسّن المحتوى الأكثر تفاعلاً
+• خطط للشهر القادم
+
+💰 توزيع الميزانية:
+• 40% إعلانات مدفوعة
+• 30% إنتاج محتوى
+• 20% تعاونات مؤثرين
+• 10% احتياطي`;
+  }
+  if (svc === 'video') {
+    return `🎬 سكريبت الفيديو لـ ${name}
+
+⏱️ المدة المقترحة: 30-60 ثانية
+
+🎬 المشهد الأول (0-5 ثوانٍ) — HOOK:
+"[صوت/صورة جذابة] هل تعرف السر وراء [نتيجة مميزة]؟"
+
+📍 المشهد الثاني (5-20 ثانية) — المشكلة:
+"كثير من الناس يعانون من [المشكلة]... ونحن في ${name} وجدنا الحل!"
+
+✨ المشهد الثالث (20-40 ثانية) — الحل:
+"[عرض المنتج/الخدمة بشكل بصري جذاب]
+هذا هو ${name} — [الميزة الرئيسية]"
+
+🎯 المشهد الرابع (40-55 ثانية) — الدليل:
+"آلاف العملاء جربوا وأحبوا النتيجة!"
+[شهادات سريعة أو أرقام]
+
+📢 CTA النهائي (55-60 ثانية):
+"اطلب الآن! الرابط في البايو 🔗"
+
+🎵 الموسيقى: طاقة عالية وإيقاع سريع
+📍 الهاشتاجات: #${domain} #تسويق #${name.replace(/\s/g,'')}`;
+  }
+  return `✅ نتيجة ${state.serviceName} لـ ${name}
+
+تم تجهيز النتيجة المخصصة لمشروعك في مجال ${domain}.
+
+لأفضل النتائج:
+• طبّق الاقتراحات خلال أسبوع
+• راجع النتائج بعد شهر
+• عدّل الاستراتيجية حسب التفاعل
+
+للنتائج المتقدمة، اشترك في الخطة المدفوعة! ⭐`;
+}
+
+function showResult(text) {
+  const el = document.getElementById('result-text');
+  if (el) el.textContent = text;
+}
+
+/* =====================================================
+   DASHBOARD TABS
+   ===================================================== */
+function switchTab(name, el) {
+  document.querySelectorAll('.tab-c').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.sb-item').forEach(i => i.classList.remove('active'));
+  const tab = document.getElementById('tab-' + name);
+  if (tab) tab.classList.add('active');
+  if (el) el.classList.add('active');
+  if (name === 'ideas') setTimeout(renderLibrary, 100);
+}
+
+/* =====================================================
+   CURRENCY
+   ===================================================== */
+const basePrices = {p1: 10, p2: 25};
+
+function toggleCurrencyDropdown() {
+  const d = document.getElementById('currency-dropdown');
+  if (d) d.style.display = d.style.display === 'none' ? 'block' : 'none';
+}
+
+function setCurrency(code, sym, flag, label, rate) {
+  const d = document.getElementById('currency-dropdown');
+  if (d) d.style.display = 'none';
+  const flagEl = document.getElementById('sel-flag');
+  const labelEl = document.getElementById('sel-label');
+  if (flagEl) flagEl.textContent = flag;
+  if (labelEl) labelEl.textContent = code + ' — ' + label;
+  ['1','2'].forEach(n => {
+    const base = basePrices['p' + n];
+    const converted = (base * rate).toFixed(rate > 10 ? 0 : rate < 1 ? 2 : 1);
+    const pEl = document.getElementById('p' + n);
+    const sEl = document.getElementById('sym' + n);
+    if (pEl) pEl.textContent = converted;
+    if (sEl) sEl.textContent = sym;
+  });
+  showToast('تم تغيير العملة إلى ' + label + ' ' + flag);
+}
+
+document.addEventListener('click', e => {
+  const wrap = document.getElementById('currency-wrap');
+  if (wrap && !wrap.contains(e.target)) {
+    const d = document.getElementById('currency-dropdown');
+    if (d) d.style.display = 'none';
+  }
+});
+
+/* =====================================================
+   CALENDAR
+   ===================================================== */
+function addToCalendar() {
+  const textEl = document.getElementById('result-text');
+  const text = textEl ? textEl.innerText.slice(0, 200) : 'خطة تسويق من سَوقلي';
+  const name = state.projectName || 'مشروعي';
+  const title = encodeURIComponent('خطة تسويق: ' + name);
+  const details = encodeURIComponent(text);
+  const now = new Date();
+  const fmt = d => d.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+  const end = new Date(now.getTime() + 60 * 60 * 1000);
+  const url = 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=' + title + '&details=' + details + '&dates=' + fmt(now) + '/' + fmt(end);
+  window.open(url, '_blank');
+  showToast('تم فتح Google Calendar 📅');
+}
+
+/* =====================================================
+   COPY RESULT
+   ===================================================== */
+function copyResult() {
+  const el = document.getElementById('result-text');
+  if (!el) return;
+  navigator.clipboard.writeText(el.innerText).then(() => showToast('تم النسخ! 📋')).catch(() => {
+    const ta = document.createElement('textarea');
+    ta.value = el.innerText;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    showToast('تم النسخ! 📋');
+  });
+}
+
+/* =====================================================
+   LOGIN
+   ===================================================== */
+async function handleLogin() {
+  const emailEl = document.getElementById('login-email');
+  const passEl = document.getElementById('login-pass');
+  const rememberEl = document.getElementById('remember-me');
+  const email = emailEl ? emailEl.value.trim() : '';
+  const password = passEl ? passEl.value : '';
+
+  if (!email || !password) {
+    showToast('الإيميل وكلمة المرور مطلوبان ❌');
+    return;
+  }
+
+  // تغيير زر الدخول
+  const btn = document.querySelector('.btn-login');
+  if (btn) { btn.textContent = 'جاري الدخول...'; btn.disabled = true; }
+
+  try {
+    const { data, error } = await _supabase.auth.signInWithPassword({ email, password });
+    if (error) {
+      showToast('بيانات غلط — تأكد من الإيميل وكلمة المرور ❌');
+      if (btn) { btn.textContent = 'تسجيل الدخول 🚀'; btn.disabled = false; }
+      return;
+    }
+    currentUser = data.user;
+    try {
+      if (rememberEl && rememberEl.checked) localStorage.setItem('soqly_remember_email', email);
+      localStorage.setItem('soqly_loggedIn', 'true');
+    } catch(e) {}
+    showToast('أهلاً بك! 🎉');
+    setTimeout(() => goPage('dashboard'), 500);
+  } catch(e) {
+    showToast('خطأ في الاتصال ❌');
+    if (btn) { btn.textContent = 'تسجيل الدخول 🚀'; btn.disabled = false; }
+  }
+}
+
+async function handleSignup() {
+  const nameEl = document.getElementById('signup-name');
+  const emailEl = document.getElementById('signup-email');
+  const passEl = document.getElementById('signup-pass');
+  const name = nameEl ? nameEl.value.trim() : '';
+  const email = emailEl ? emailEl.value.trim() : '';
+  const password = passEl ? passEl.value : '';
+
+  if (!name || !email || !password) {
+    showToast('كل الحقول مطلوبة ❌'); return;
+  }
+  if (password.length < 6) {
+    showToast('كلمة المرور لازم تكون 6 حروف على الأقل ❌'); return;
+  }
+
+  const btn = document.querySelector('.btn-signup');
+  if (btn) { btn.textContent = 'جاري التسجيل...'; btn.disabled = true; }
+
+  try {
+    const { data, error } = await _supabase.auth.signUp({
+      email, password,
+      options: { data: { name } }
+    });
+    if (error) {
+      showToast('خطأ: ' + error.message + ' ❌');
+      if (btn) { btn.textContent = 'إنشاء حساب 🚀'; btn.disabled = false; }
+      return;
+    }
+    currentUser = data.user;
+    // حفظ في جدول users
+    await _supabase.from('users').upsert([{ id: data.user.id, name, email, plan: 'free' }]);
+    localStorage.setItem('soqly_loggedIn', 'true');
+    showToast('تم إنشاء الحساب! 🎉');
+    setTimeout(() => goPage('dashboard'), 500);
+  } catch(e) {
+    showToast('خطأ في الاتصال ❌');
+    if (btn) { btn.textContent = 'إنشاء حساب 🚀'; btn.disabled = false; }
+  }
+}
+
+async function logout() {
+  try {
+    await _supabase.auth.signOut();
+    localStorage.removeItem('soqly_loggedIn');
+    currentUser = null;
+  } catch(e) {}
+  goPage('landing');
+}
+
+function initLoginPage() {
+  try {
+    const saved = localStorage.getItem('soqly_remember_email');
+    const emailEl = document.getElementById('login-email');
+    const rememberEl = document.getElementById('remember-me');
+    if (saved && emailEl) { emailEl.value = saved; if (rememberEl) rememberEl.checked = true; }
+  } catch(e) {}
+}
+
+function saveSettings() {
+  showToast('تم حفظ الإعدادات ✅');
+}
+
+/* =====================================================
+   CHATBOT
+   ===================================================== */
+function toggleChat() {
+  const w = document.getElementById('chat-window');
+  w.classList.toggle('open');
+}
+
+function quickAsk(q) {
+  addMsg(q, 'user');
+  const w = document.getElementById('chat-window');
+  w.classList.add('open');
+  const reply = getQuickReply(q);
+  setTimeout(() => addMsg(reply, 'bot'), 700);
+}
+
+function sendChat() {
+  const inp = document.getElementById('chat-inp');
+  const q = inp.value.trim();
+  if (!q) return;
+  inp.value = '';
+  addMsg(q, 'user');
+  setTimeout(() => {
+    const reply = getQuickReply(q);
+    addMsg(reply, 'bot');
+  }, 800);
+}
+
+function getQuickReply(q) {
+  const lower = q.toLowerCase();
+  if (lower.includes('سعر') || lower.includes('أسعار') || lower.includes('اشتراك') || lower.includes('باقة')) {
+    return '💰 باقات سَوقلي:\n\n🆓 مجاني: 10 أفكار يومياً + خطة تسويق بسيطة\n\n⭐ Pro (10$/شهر): كل شيء غير محدود + Content Calendar + تحليل المنافسين\n\n🏢 Business (25$/شهر): كل Pro + عدة مشاريع + AI Product Model\n\nاضغط "ابدأ مجاناً" للتسجيل!';
+  }
+  if (lower.includes('مطعم') || lower.includes('اكل') || lower.includes('طعام')) {
+    return '🍔 للمطاعم عندنا:\n\n📸 أفكار محتوى: صور الأطباق، فيديو التحضير، عروض اليوم\n📋 خطة تسويق شهرية كاملة\n🎬 سكريبتات للريلز والتيك توك\n🏷️ حملات عروض وتخفيضات\n🎵 حملة TikTok مخصصة\n\nاضغط "جرّب دلوقتي" واختر مجال المطاعم! 🚀';
+  }
+  if (lower.includes('ملابس') || lower.includes('fashion') || lower.includes('موضة')) {
+    return '👕 لمتاجر الملابس:\n\n✨ أفكار Try-On Trends على TikTok\n📋 خطة نمو على السوشيال ميديا\n🎬 سكريبتات عرض المنتجات\n🛍️ حملات سيزونال سيل\n🤖 AI Product Model (عرض الملابس على مودل AI)\n\nكلها خدمات مخصصة لك!';
+  }
+  if (lower.includes('تيك توك') || lower.includes('tiktok') || lower.includes('انستجرام') || lower.includes('instagram')) {
+    return '📱 حملات سوشيال ميديا:\n\n🎵 TikTok: فيديوهات ترند + هاشتاجات + Hook قوي\n📸 Instagram: Reels + Stories + إعلانات مستهدفة\n\nالخطوات:\n1️⃣ اختر مجالك\n2️⃣ اختر خدمة "حملات إعلانية"\n3️⃣ احصل على حملة مخصصة في دقائق!';
+  }
+  if (lower.includes('calendar') || lower.includes('جدول') || lower.includes('نشر')) {
+    return '📅 Content Calendar:\n\nميزة حصرية للمشتركين في خطة Pro!\n\nتحصل على:\n• جدول نشر شهري كامل\n• محتوى لكل يوم في الأسبوع\n• أوقات النشر المثالية\n• أفكار لكل منصة\n\nاشترك في Pro بـ 10$/شهر للوصول!';
+  }
+  if (lower.includes('مجاني') || lower.includes('مجانا') || lower.includes('free')) {
+    return '🆓 الخطة المجانية تشمل:\n\n• 10 أفكار محتوى يومياً\n• خطة تسويق بسيطة\n• سكريبت فيديو واحد/شهر\n• الشات بوت الذكي\n\nابدأ مجاناً الآن بدون بطاقة ائتمان!';
+  }
+  // Default smart reply
+  return generateSmartReply(q);
+}
+
+function generateSmartReply(q) {
+  const replies = [
+    `شكراً على سؤالك! 😊\n\nلمساعدتك بشكل أفضل، اختر مجال مشروعك من الصفحة الرئيسية وابدأ في الحصول على أفكار مخصصة فوراً!\n\nأو اسألني عن: الأسعار، المطاعم، الملابس، حملات TikTok، أو Content Calendar.`,
+    `سؤال ممتاز! 🤔\n\nسَوقلي بتساعدك في:\n💡 أفكار المحتوى\n📋 خطط التسويق\n🎬 سكريبتات الفيديو\n🎯 الحملات الإعلانية\n\nاضغط "جرّب دلوقتي" لتبدأ!`,
+    `أنا هنا لمساعدتك! 🚀\n\nجرّب تسألني عن:\n• كيف أسوّق مشروعي؟\n• أفكار محتوى لـ TikTok\n• خطة تسويق لمطعم\n• أسعار الاشتراك`
+  ];
+  return replies[Math.floor(Math.random() * replies.length)];
+}
+
+function addMsg(text, type) {
+  const msgs = document.getElementById('chat-msgs');
+  const div = document.createElement('div');
+  div.className = 'msg ' + type;
+  div.style.whiteSpace = 'pre-line';
+  div.textContent = text;
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+  return div;
+}
+
+/* =====================================================
+   START SERVICE FLOW (from landing/dashboard)
+   ===================================================== */
+function startServiceFlow(domainKey) {
+  currentProjectKey = domainKey;
+  goPage('services');
+  initServicesPage();
+  // Auto-select domain
+  setTimeout(() => {
+    const cards = document.querySelectorAll('#svc-step1 .pick-card');
+    const domainMap = {restaurant:0, fashion:1, retail:2, beauty:3, tech:4, services:5};
+    const idx = domainMap[domainKey];
+    if (idx !== undefined && cards[idx]) {
+      selectDomain(domainKey, cards[idx]);
+    }
+  }, 100);
+}
+
+/* =====================================================
+   TOAST
+   ===================================================== */
+let toastTimer;
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  if (!t) return;
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+
+/* =====================================================
+   DOWNLOAD RESULT
+   ===================================================== */
+function downloadResult() {
+  const el = document.getElementById('result-text');
+  const text = el ? el.innerText : '';
+  if (!text.trim()) { showToast('لا توجد نتيجة للتحميل'); return; }
+  const name = state.projectName || 'مشروعي';
+  const blob = new Blob([text], {type: 'text/plain;charset=utf-8'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'sawqly-' + name + '.txt';
+  a.click();
+  URL.revokeObjectURL(a.href);
+  showToast('تم التحميل ✅');
+}
+
+/* =====================================================
+   MARKETING LIBRARY DATA — مكتبة التسويق
+   ===================================================== */
+const marketingLibrary = [
+  // ==================== مطاعم ====================
+  {id:1, domain:'restaurant', type:'content', tag:'📱 محتوى', title:'فيديو تحضير الطبق', desc:'صوّر خلف الكواليس وهو بيتحضر الطبق من الصفر — الجمهور بيحب يشوف الأصالة', tip:'أضف موسيقى هادئة وأظهر التفاصيل بالتصوير المقرّب'},
+  {id:2, domain:'restaurant', type:'video', tag:'🎬 فيديو', title:'تجربة العميل الأول', desc:'اطلب من عميل حقيقي يحكي تجربته بعد الأكل مباشرة — أصدق من أي إعلان', tip:'التلقائية أفضل من الإعداد المسبق'},
+  {id:3, domain:'restaurant', type:'hook', tag:'🪝 Hook', title:'"مش هتصدق إن الطبق ده بيتعمل في 10 دقائق"', desc:'Hook افتتاحي قوي لفيديو تحضير سريع', tip:'اعرض النتيجة في أول 2 ثانية'},
+  {id:4, domain:'restaurant', type:'campaign', tag:'📢 حملة', title:'حملة "وجبة الأسبوع"', desc:'كل أسبوع ارفع وجبة مميزة بسعر خاص مع كاونتداون — يخلق urgency', tip:'استخدم Story مع countdown sticker'},
+  {id:5, domain:'restaurant', type:'content', tag:'📱 محتوى', title:'خلف الكواليس في المطبخ', desc:'يوم في حياة المطبخ — من الفجر للإغلاق', tip:'ركّز على تفاصيل النظافة والجودة'},
+  {id:6, domain:'restaurant', type:'tip', tag:'💡 نصيحة', title:'وقت النشر المثالي للمطاعم', desc:'انشر في 11ص (قبل الغداء) و5م (قبل العشا) — أعلى engagement', tip:'الخميس والجمعة الأعلى تفاعلاً'},
+  {id:7, domain:'restaurant', type:'content', tag:'📱 محتوى', title:'مسابقة "خمّن الطبق"', desc:'ارفع صورة مقربة جداً واطلب من المتابعين يخمّنوا إيه الطبق', tip:'يرفع التعليقات بشكل كبير'},
+  {id:8, domain:'restaurant', type:'video', tag:'🎬 فيديو', title:'مقارنة قبل وبعد الطبق', desc:'خامات خام مقابل الطبق النهائي — transformation رائع', tip:'اجعل المونتاج سريعاً لا يتجاوز 15 ثانية'},
+
+  // ==================== موضة ====================
+  {id:9, domain:'fashion', type:'content', tag:'📱 محتوى', title:'تنسيق 3 لوكات من قطعة واحدة', desc:'أظهر كيف قطعة واحدة تنفع لمواقف مختلفة — عملي ومفيد', tip:'استخدم نفس الخلفية عشان الفرق يبان أكتر'},
+  {id:10, domain:'fashion', type:'video', tag:'🎬 فيديو', title:'Try-On Haul', desc:'جرّب مجموعة منتجات جديدة أمام الكاميرا مع ردود فعل طبيعية', tip:'الردود الطبيعية أفضل من المصطنعة'},
+  {id:11, domain:'fashion', type:'hook', tag:'🪝 Hook', title:'"الغلطة اللي بتخلي ملابسك تبان غلط"', desc:'Hook يجذب الاهتمام ويخلق فضول', tip:'ابدأ بالمشكلة قبل الحل'},
+  {id:12, domain:'fashion', type:'campaign', tag:'📢 حملة', title:'حملة "لوك اليوم"', desc:'كل يوم لوك مختلف لأسبوع كامل — يبني عادة المتابعة اليومية', tip:'حدد وقت ثابت للنشر كل يوم'},
+  {id:13, domain:'fashion', type:'tip', tag:'💡 نصيحة', title:'الألوان الأكتر مبيعاً حسب الموسم', desc:'خطط محتواك على الألوان الترند في كل موسم', tip:'تابع Pinterest Trend Reports كل موسم'},
+  {id:14, domain:'fashion', type:'content', tag:'📱 محتوى', title:'مقارنة بين ستايلين مختلفين', desc:'Casual vs Formal — ساعد جمهورك يختار', tip:'اسأل رأيهم في التعليقات'},
+
+  // ==================== تجارة إلكترونية ====================
+  {id:15, domain:'ecommerce', type:'content', tag:'📱 محتوى', title:'Unboxing المنتج', desc:'افتح المنتج أمام الكاميرا بتفاعل طبيعي — يبني ثقة', tip:'أظهر التغليف والتفاصيل'},
+  {id:16, domain:'ecommerce', type:'video', tag:'🎬 فيديو', title:'مراجعة صادقة من عميل حقيقي', desc:'اطلب من عميل يراجع المنتج بدون script — يزيد الثقة 10 أضعاف', tip:'عدم الكمال يزيد المصداقية'},
+  {id:17, domain:'ecommerce', type:'campaign', tag:'📢 حملة', title:'عرض Flash Sale 24 ساعة', desc:'خصم مفاجئ لـ 24 ساعة بس — urgency حقيقي يرفع المبيعات', tip:'أضف countdown timer في الستوري'},
+  {id:18, domain:'ecommerce', type:'hook', tag:'🪝 Hook', title:'"لو اشتريت ده قبل كده كنت وفّرت كتير"', desc:'Hook يثير الندم المحفّز للشراء', tip:'اربطه بمشكلة يعانيها العميل'},
+  {id:19, domain:'ecommerce', type:'tip', tag:'💡 نصيحة', title:'صور المنتج على خلفية بيضاء + في context', desc:'الصورة على خلفية بيضاء للوضوح + صورة في الاستخدام الحقيقي', tip:'الصورة في السياق ترفع المبيعات 40%'},
+  {id:20, domain:'ecommerce', type:'content', tag:'📱 محتوى', title:'أكتر 5 منتجات مبيعاً هذا الشهر', desc:'شارك best sellers كل شهر — social proof قوي', tip:'أضف عدد المبيعات لو ممكن'},
+
+  // ==================== تجميل ====================
+  {id:21, domain:'beauty', type:'video', tag:'🎬 فيديو', title:'تيوتوريال ماكياج 5 دقائق', desc:'لوك كامل في 5 دقائق — سريع وعملي ومفيد', tip:'أظهر المنتجات المستخدمة بوضوح'},
+  {id:22, domain:'beauty', type:'content', tag:'📱 محتوى', title:'روتين عناية الصباح', desc:'خطوة خطوة من الغسيل للـ SPF — تعليمي ومفيد', tip:'ذكر أسماء المنتجات بوضوح'},
+  {id:23, domain:'beauty', type:'hook', tag:'🪝 Hook', title:'"الخطأ اللي بيخلي بشرتك تبان متعبة"', desc:'Hook يجذب اهتمام كل بنت', tip:'ابدأ بالمشكلة الشائعة'},
+  {id:24, domain:'beauty', type:'campaign', tag:'📢 حملة', title:'تحدي "قبل وبعد بدون فلاتر"', desc:'نتائج حقيقية بدون تعديل — يبني ثقة هائلة', tip:'الأصالة هي أقوى أداة تسويق في التجميل'},
+  {id:25, domain:'beauty', type:'tip', tag:'💡 نصيحة', title:'إضاءة Ring Light = صور احترافية', desc:'Ring Light الأساسية بتحوّل صور المنتجات لاحترافية بسعر بسيط', tip:'ضعيها أمامك مباشرة للحصول على catchlight في العين'},
+  {id:26, domain:'beauty', type:'content', tag:'📱 محتوى', title:'أفضل 3 منتجات بأقل من 100 جنيه', desc:'قيمة عالية بسعر منخفض — يجذب شريحة واسعة', tip:'الـ budget-friendly content يحصل على تفاعل عالي'},
+
+  // ==================== تقنية ====================
+  {id:27, domain:'tech', type:'video', tag:'🎬 فيديو', title:'Demo المنتج في 60 ثانية', desc:'أظهر المشكلة ثم الحل بمنتجك في دقيقة واحدة — مباشر وفعّال', tip:'ابدأ بالمشكلة في أول 3 ثواني'},
+  {id:28, domain:'tech', type:'content', tag:'📱 محتوى', title:'نصيحة تقنية أسبوعية', desc:'نصيحة واحدة مفيدة كل أسبوع — يبني مكانة الخبير', tip:'البساطة أهم من العمق'},
+  {id:29, domain:'tech', type:'hook', tag:'🪝 Hook', title:'"90% من الناس بيضيّعوا وقتهم في ده — وفيه طريقة أسرع"', desc:'Hook قوي لمحتوى productivity', tip:'الأرقام تجذب الانتباه'},
+  {id:30, domain:'tech', type:'campaign', tag:'📢 حملة', title:'حملة "مشكلة + حل"', desc:'في كل بوست: مشكلة شائعة + حلها بمنتجك — pattern ناجح', tip:'اجعلها سلسلة أسبوعية'},
+  {id:31, domain:'tech', type:'tip', tag:'💡 نصيحة', title:'LinkedIn للـ B2B أقوى من Instagram', desc:'لو جمهورك شركات ومحترفين، LinkedIn يوصلك لهم أسرع وأرخص', tip:'انشر مقالات قصيرة مع insights'},
+  {id:32, domain:'tech', type:'content', tag:'📱 محتوى', title:'مقارنة مع المنافسين بموضوعية', desc:'مقارنة صادقة تُظهر مميزاتك بدون هجوم — يبني ثقة', tip:'اذكر نقاط ضعفك أيضاً لتزيد مصداقيتك'},
+
+  // ==================== خدمات مهنية ====================
+  {id:33, domain:'services', type:'content', tag:'📱 محتوى', title:'قصة نجاح عميل', desc:'قبل وبعد العمل معك — أقوى دليل على كفاءتك', tip:'استأذن العميل واحكِ القصة بأرقام'},
+  {id:34, domain:'services', type:'video', tag:'🎬 فيديو', title:'يوم في عملك', desc:'أظهر روتين عملك اليومي — يبني親近ية مع الجمهور', tip:'أظهر التحديات الحقيقية وليس فقط النجاحات'},
+  {id:35, domain:'services', type:'hook', tag:'🪝 Hook', title:'"لو مش بتعمل الخطوة دي، بتخسر عملاء كل يوم"', desc:'Hook يثير القلق المحرّك للتصرف', tip:'تأكد إن الخطوة فعلاً مفيدة وليست مبالغة'},
+  {id:36, domain:'services', type:'campaign', tag:'📢 حملة', title:'حملة "استشارة مجانية"', desc:'استشارة مجانية 15 دقيقة — lead magnet ممتاز', tip:'قيّد الأماكن عشان تخلق urgency'},
+  {id:37, domain:'services', type:'tip', tag:'💡 نصيحة', title:'الـ Testimonials بالصوت أقوى من الكتابة', desc:'فيديو عميل راضٍ يتكلم بصدق = أفضل إعلان', tip:'سؤالين بس: المشكلة قبلك + النتيجة بعدك'},
+  {id:38, domain:'services', type:'content', tag:'📱 محتوى', title:'أشهر 5 أسئلة يسألها العملاء', desc:'Q&A بيُظهر خبرتك ويجيب على objections العملاء', tip:'حوّل كل سؤال لبوست منفصل'},
+
+  // ==================== تسويق عام ====================
+  {id:39, domain:'general', type:'tip', tag:'💡 نصيحة', title:'قاعدة 80/20 في المحتوى', desc:'80% محتوى مفيد وترفيهي + 20% بيع مباشر — ده السر', tip:'الناس بتتابع عشان تستفيد مش عشان تشتري'},
+  {id:40, domain:'general', type:'tip', tag:'💡 نصيحة', title:'وقت النشر الذهبي', desc:'7-9 صباحاً + 12-2 ظهراً + 7-10 مساءً — أعلى نشاط للجمهور العربي', tip:'جرب وشوف وقت جمهورك تحديداً في الـ Insights'},
+  {id:41, domain:'general', type:'hook', tag:'🪝 Hook', title:'أقوى 5 كلمات في التسويق', desc:'"مجاني، جديد، الآن، أنت، لماذا" — ادمجهم في عناوينك', tip:'كلمة "أنت" تضاعف التفاعل'},
+  {id:42, domain:'general', type:'campaign', tag:'📢 حملة', title:'حملة User Generated Content', desc:'اطلب من عملاءك يشاركوا تجربتهم بـ hashtag خاص — محتوى مجاني لا نهائي', tip:'قدّم جائزة رمزية للمشاركين'},
+  {id:43, domain:'general', type:'content', tag:'📱 محتوى', title:'محتوى "خلف الكواليس"', desc:'الناس فضولية — أظهر عملية الإنتاج والتفاصيل الخفية', tip:'يزيد الثقة والارتباط العاطفي بالبراند'},
+  {id:44, domain:'general', type:'tip', tag:'💡 نصيحة', title:'Consistency > Perfection', desc:'أنشر بانتظام حتى لو المحتوى بسيط — أفضل من محتوى مثالي نادر', tip:'جدول أسبوعي ثابت أفضل من انفجار محتوى ثم صمت'},
+  {id:45, domain:'general', type:'campaign', tag:'📢 حملة', title:'تحدي 30 يوم', desc:'محتوى يومي لشهر كامل — يبني following قوي ويرفع الـ reach', tip:'ضع الأفكار الـ 30 قبل ما تبدأ'},
+  {id:46, domain:'general', type:'tip', tag:'💡 نصيحة', title:'CTA في كل بوست', desc:'كل بوست لازم يكون فيه call-to-action واضح: تعليق، شير، تواصل', tip:'سؤال في نهاية البوست يضاعف التعليقات'},
+  {id:47, domain:'general', type:'content', tag:'📱 محتوى', title:'Carousel "5 نصائح" أو "3 أخطاء"', desc:'Carousel posts تحصل على أعلى reach في Instagram وLinkedIn', tip:'السلايد الأولى هي الأهم — اجعلها جذابة جداً'},
+  {id:48, domain:'general', type:'hook', tag:'🪝 Hook', title:'"الحقيقة اللي مش أحد بيقولهالك عن..."', desc:'Hook يثير الفضول ويكسر التوقع', tip:'تأكد إن المحتوى فيه فعلاً معلومة مفيدة'},
+];
+
+/* =====================================================
+   LIBRARY FUNCTIONS
+   ===================================================== */
+let currentDomainFilter = 'all';
+let currentTypeFilter = 'all';
+let currentSearchQuery = '';
+
+function renderLibrary() {
+  const grid = document.getElementById('lib-grid');
+  const countEl = document.getElementById('lib-count');
+  if (!grid) return;
+
+  let items = marketingLibrary;
+
+  // فلتر المجال
+  if (currentDomainFilter !== 'all') {
+    items = items.filter(i => i.domain === currentDomainFilter);
+  }
+
+  // فلتر النوع
+  if (currentTypeFilter !== 'all') {
+    items = items.filter(i => i.type === currentTypeFilter);
+  }
+
+  // فلتر البحث
+  if (currentSearchQuery) {
+    const q = currentSearchQuery.toLowerCase();
+    items = items.filter(i =>
+      i.title.includes(currentSearchQuery) ||
+      i.desc.includes(currentSearchQuery) ||
+      i.tip.includes(currentSearchQuery)
+    );
+  }
+
+  if (countEl) countEl.textContent = items.length + ' فكرة';
+
+  const tagColors = {
+    '📱 محتوى': '#E8F5E9',
+    '🎬 فيديو': '#E3F2FD',
+    '📢 حملة': '#FFF3E0',
+    '🪝 Hook': '#FCE4EC',
+    '💡 نصيحة': '#F3E5F5'
+  };
+
+  grid.innerHTML = items.map(item => `
+    <div class="lib-card" onclick="showLibCard(${item.id})">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;">
+        <span class="lib-tag" style="background:${tagColors[item.tag]||'#F5F5F5'};color:#333">${item.tag}</span>
+      </div>
+      <div style="font-size:14px;font-weight:800;color:var(--brown);margin-bottom:6px;line-height:1.4">${item.title}</div>
+      <div style="font-size:12px;color:var(--brown3);line-height:1.6;margin-bottom:12px">${item.desc}</div>
+      <div style="font-size:11px;background:rgba(200,169,126,.08);border-radius:10px;padding:8px 10px;color:var(--brown2);">
+        💡 <strong>نصيحة:</strong> ${item.tip}
+      </div>
+    </div>
+  `).join('');
+}
+
+function filterByDomain(domain, el) {
+  currentDomainFilter = domain;
+  document.querySelectorAll('.lib-filter').forEach(b => b.classList.remove('active'));
+  if (el) el.classList.add('active');
+  renderLibrary();
+}
+
+function filterByType(type, el) {
+  currentTypeFilter = type;
+  document.querySelectorAll('.lib-type').forEach(b => b.classList.remove('active'));
+  if (el) el.classList.add('active');
+  renderLibrary();
+}
+
+function filterLibrary(val) {
+  currentSearchQuery = val;
+  renderLibrary();
+}
+
+function showLibCard(id) {
+  const item = marketingLibrary.find(function(i){ return i.id === id; });
+  if (!item) return;
+  const html = [
+    '<div style="margin-bottom:12px"><span style="font-size:13px;line-height:1.7;color:var(--brown)">' + item.desc + '</span></div>',
+    '<div style="background:rgba(200,169,126,.1);border-radius:12px;padding:14px;margin-bottom:16px">',
+    '<div style="font-size:12px;font-weight:700;color:var(--brown);margin-bottom:4px">&#128161; نصيحة الخبير</div>',
+    '<div style="font-size:12px;color:var(--brown3)">' + item.tip + '</div></div>',
+    '<button onclick="closeToolsModal()" style="width:100%;padding:12px;border-radius:14px;background:linear-gradient(135deg,#3E2723,#5D4037);border:none;color:white;font-size:13px;font-weight:800;cursor:pointer">&#x2190; طبّق الفكرة دي</button>'
+  ].join('');
+  showToolsModal(item.title, html);
+}
+
+/* =====================================================
+   SEARCH BAR
+   ===================================================== */
+const searchableItems = [
+  {name:'أفكار محتوى', tab:'ideas', icon:'💡', desc:'توليد أفكار محتوى لمشروعك'},
+  {name:'خطة تسويق', tab:'services', icon:'📋', desc:'خطة تسويق متكاملة'},
+  {name:'سكريبت فيديو', tab:'services', icon:'🎬', desc:'سكريبت فيديو احترافي'},
+  {name:'حملات إعلانية', tab:'campaigns', icon:'📢', desc:'حملات تسويقية فعّالة'},
+  {name:'النتائج السابقة', tab:'results', icon:'📊', desc:'كل نتائجك السابقة'},
+  {name:'الأدوات', tab:'tools', icon:'🛠️', desc:'أدوات تسويق متقدمة'},
+  {name:'الإعدادات', tab:'settings', icon:'⚙️', desc:'إعدادات حسابك'},
+  {name:'Hook Generator', tab:'tools', icon:'🪝', desc:'أقوى جمل افتتاحية'},
+  {name:'Hashtag Generator', tab:'tools', icon:'#️⃣', desc:'هاشتاجات مخصصة'},
+  {name:'مشروع جديد', page:'services', icon:'✨', desc:'ابدأ مشروع جديد'},
+];
+
+let searchTimeout = null;
+
+function handleDashSearch(val) {
+  const clearBtn = document.getElementById('search-clear');
+  if (clearBtn) clearBtn.style.display = val ? 'block' : 'none';
+
+  clearTimeout(searchTimeout);
+  if (!val.trim()) { removeSearchResults(); return; }
+
+  searchTimeout = setTimeout(() => {
+    const results = searchableItems.filter(item =>
+      item.name.includes(val) || item.desc.includes(val)
+    );
+    showSearchResults(results, val);
+  }, 300);
+}
+
+function showSearchResults(results, query) {
+  removeSearchResults();
+  const searchBar = document.querySelector('.dash-search');
+  if (!searchBar) return;
+
+  const dropdown = document.createElement('div');
+  dropdown.id = 'search-dropdown';
+  dropdown.style.cssText = 'position:absolute;top:calc(100% + 8px);right:0;left:0;background:white;border-radius:16px;box-shadow:0 8px 30px rgba(62,39,35,.15);border:1.5px solid rgba(200,169,126,.2);overflow:hidden;z-index:100;max-height:280px;overflow-y:auto;';
+
+  if (results.length === 0) {
+    dropdown.innerHTML = '<div style="padding:16px;text-align:center;color:var(--brown3);font-size:13px">لا توجد نتائج لـ "'+query+'"</div>';
+  } else {
+    results.forEach(item => {
+      const div = document.createElement('div');
+      div.style.cssText = 'padding:12px 16px;cursor:pointer;display:flex;align-items:center;gap:12px;transition:background .15s;';
+      div.innerHTML = '<span style="font-size:20px">'+item.icon+'</span><div><div style="font-size:13px;font-weight:700;color:var(--brown)">'+item.name+'</div><div style="font-size:11px;color:var(--brown3)">'+item.desc+'</div></div>';
+      div.onmouseenter = () => div.style.background = 'rgba(200,169,126,.08)';
+      div.onmouseleave = () => div.style.background = 'transparent';
+      div.onclick = () => {
+        clearDashSearch();
+        if (item.page) { goPage(item.page); initServicesPage(); }
+        else if (item.tab) switchTab(item.tab);
+      };
+      dropdown.appendChild(div);
+    });
+  }
+
+  searchBar.style.position = 'relative';
+  searchBar.appendChild(dropdown);
+}
+
+function removeSearchResults() {
+  const d = document.getElementById('search-dropdown');
+  if (d) d.remove();
+}
+
+function clearDashSearch() {
+  const inp = document.getElementById('dash-search-input');
+  if (inp) inp.value = '';
+  const clearBtn = document.getElementById('search-clear');
+  if (clearBtn) clearBtn.style.display = 'none';
+  removeSearchResults();
+}
+
+/* =====================================================
+   AUTH TABS — تبويب دخول/تسجيل
+   ===================================================== */
+function switchAuthTab(tab) {
+  const loginForm = document.getElementById('auth-login-form');
+  const signupForm = document.getElementById('auth-signup-form');
+  const loginBtn = document.getElementById('tab-login-btn');
+  const signupBtn = document.getElementById('tab-signup-btn');
+
+  if (tab === 'login') {
+    if (loginForm) loginForm.style.display = 'block';
+    if (signupForm) signupForm.style.display = 'none';
+    if (loginBtn) { loginBtn.style.background = 'white'; loginBtn.style.color = 'var(--brown)'; loginBtn.style.boxShadow = '0 2px 8px rgba(0,0,0,.08)'; loginBtn.style.fontWeight = '800'; }
+    if (signupBtn) { signupBtn.style.background = 'transparent'; signupBtn.style.color = 'var(--brown3)'; signupBtn.style.boxShadow = 'none'; signupBtn.style.fontWeight = '700'; }
+  } else {
+    if (loginForm) loginForm.style.display = 'none';
+    if (signupForm) signupForm.style.display = 'block';
+    if (signupBtn) { signupBtn.style.background = 'white'; signupBtn.style.color = 'var(--brown)'; signupBtn.style.boxShadow = '0 2px 8px rgba(0,0,0,.08)'; signupBtn.style.fontWeight = '800'; }
+    if (loginBtn) { loginBtn.style.background = 'transparent'; loginBtn.style.color = 'var(--brown3)'; loginBtn.style.boxShadow = 'none'; loginBtn.style.fontWeight = '700'; }
+  }
+}
+
+/* =====================================================
+   TOOLS MODAL
+   ===================================================== */
+function closeToolsModal() {
+  const m = document.getElementById('tools-modal');
+  if (m) m.style.display = 'none';
+}
+
+function showToolsModal(title, html) {
+  const m = document.getElementById('tools-modal');
+  if (!m) return;
+  m.innerHTML = `
+    <div style="position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.45);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;padding:20px" onclick="if(event.target===this)closeToolsModal()">
+      <div style="background:white;border-radius:20px;padding:28px;max-width:500px;width:100%;max-height:80vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.25)">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
+          <div style="font-size:18px;font-weight:900;color:var(--brown)">${title}</div>
+          <button onclick="closeToolsModal()" style="background:none;border:none;font-size:20px;cursor:pointer;color:var(--brown3);line-height:1">✕</button>
+        </div>
+        <div>${html}</div>
+      </div>
+    </div>`;
+  m.style.display = 'block';
+}
+
+/* =====================================================
+   HOOK GENERATOR
+   ===================================================== */
+const allHooks = [
+  '90% من الناس لا يعرفون هذه الحيلة...',
+  'جربت هذا المنتج لمدة 7 أيام — النتيجة صدمتني!',
+  'لا تشتري هذا المنتج قبل مشاهدة الفيديو',
+  'هذا الخطأ يقع فيه معظم أصحاب المشاريع',
+  'أفضل سر لزيادة المبيعات في 2025',
+  'كيف حولت مشروعي لـ 3 أضعاف في شهر واحد؟',
+  'الحقيقة التي لا يخبرك بها أحد عن التسويق',
+  'POV: قررت أبدأ مشروعي بـ 500 جنيه فقط',
+  'لو عارف هذا من زمان كنت وفّرت آلاف!',
+  'هل تعرف لماذا مشروعك لا ينمو؟ الجواب هنا',
+];
+
+function openHookGenerator() {
+  const domain = state.domain || 'restaurant';
+  const hooks = allHooks.sort(() => 0.5 - Math.random()).slice(0, 5);
+  const html = `
+    <p style="font-size:13px;color:var(--brown3);margin-bottom:16px">أقوى جمل افتتاحية لفيديوهاتك على TikTok وInstagram</p>
+    <div id="hooks-list" style="display:flex;flex-direction:column;gap:10px">
+      ${hooks.map(h => `<div style="padding:12px 16px;border-radius:12px;border:1.5px solid rgba(200,169,126,.2);font-size:13px;font-weight:700;color:var(--brown);cursor:pointer;transition:all .2s" onclick="copyHook(this,'${h.replace(/'/g,"\'")}')">
+        ${h}
+        <span style="float:left;font-size:11px;color:var(--gold)">نسخ ←</span>
+      </div>`).join('')}
+    </div>
+    <button onclick="refreshHooks()" style="margin-top:16px;padding:10px 20px;border-radius:14px;background:linear-gradient(135deg,var(--brown),var(--brown2));border:none;color:white;font-size:13px;font-weight:700;cursor:pointer;font-family:'Cairo',sans-serif">🔄 توليد آخرين</button>`;
+  showToolsModal('🪝 Hook Generator', html);
+}
+
+function refreshHooks() {
+  const hooks = allHooks.sort(() => 0.5 - Math.random()).slice(0, 5);
+  const list = document.getElementById('hooks-list');
+  if (list) list.innerHTML = hooks.map(h => `<div style="padding:12px 16px;border-radius:12px;border:1.5px solid rgba(200,169,126,.2);font-size:13px;font-weight:700;color:var(--brown);cursor:pointer" onclick="copyHook(this,'${h.replace(/'/g,"\'")}')">
+    ${h}<span style="float:left;font-size:11px;color:var(--gold)">نسخ ←</span></div>`).join('');
+}
+
+function copyHook(el, text) {
+  navigator.clipboard.writeText(text).catch(() => {});
+  el.style.background = 'rgba(200,169,126,.1)';
+  el.style.borderColor = 'var(--gold)';
+  showToast('تم نسخ الـ Hook 🪝');
+}
+
+/* =====================================================
+   HASHTAG GENERATOR
+   ===================================================== */
+const hashtagsByDomain = {
+  restaurant: ['#مطعم', '#اكل', '#وجبات', '#مطبخ', '#طعام', '#food', '#foodie', '#restaurant', '#yummy', '#cooking', '#chef', '#instafood', '#tasty', '#delicious'],
+  fashion: ['#ملابس', '#موضة', '#ستايل', '#fashion', '#style', '#outfit', '#ootd', '#clothing', '#تسوق', '#fashionblogger', '#trendy', '#wear'],
+  retail: ['#تسوق', '#متجر', '#عروض', '#خصومات', '#shop', '#shopping', '#sale', '#deals', '#store', '#online', '#business'],
+  beauty: ['#تجميل', '#ماكياج', '#عناية', '#beauty', '#makeup', '#skincare', '#selfcare', '#beautytips', '#glam', '#cosmetics'],
+  tech: ['#تقنية', '#تكنولوجيا', '#tech', '#technology', '#startup', '#digital', '#software', '#innovation', '#coding'],
+  services: ['#خدمات', '#اعمال', '#تطوير', '#services', '#business', '#consulting', '#professional', '#work']
+};
+
+function openHashtagGenerator() {
+  const domain = state.domain || 'restaurant';
+  const tags = (hashtagsByDomain[domain] || hashtagsByDomain.restaurant).concat(['#تسويق', '#سَوقلي', '#socialmedia', '#marketing', '#contentcreator', '#entrepreneur']);
+  const selected = tags.sort(() => 0.5 - Math.random()).slice(0, 12);
+  const html = `
+    <p style="font-size:13px;color:var(--brown3);margin-bottom:16px">هاشتاجات مخصصة لمجال ${domainServices[domain]?.name || 'مشروعك'}</p>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px" id="hashtags-container">
+      ${selected.map(t => `<span style="padding:6px 14px;border-radius:20px;background:rgba(200,169,126,.12);border:1px solid rgba(200,169,126,.25);font-size:13px;font-weight:700;color:var(--brown);cursor:pointer" onclick="this.style.background='rgba(200,169,126,.3)'">
+        ${t}</span>`).join('')}
+    </div>
+    <button onclick="copyAllHashtags()" style="padding:10px 20px;border-radius:14px;background:linear-gradient(135deg,var(--gold),#a07840);border:none;color:var(--brown);font-size:13px;font-weight:700;cursor:pointer;font-family:'Cairo',sans-serif">📋 نسخ الكل</button>`;
+  showToolsModal('#️⃣ Hashtag Generator', html);
+}
+
+function copyAllHashtags() {
+  const tags = Array.from(document.querySelectorAll('#hashtags-container span')).map(s => s.textContent.trim()).join(' ');
+  navigator.clipboard.writeText(tags).catch(() => {});
+  showToast('تم نسخ الهاشتاجات 🔖');
+}
+
+/* =====================================================
+   POST DESIGN GENERATOR
+   ===================================================== */
+const postDesigns = [
+  {title: 'بوست عرض خصم 30%', desc: 'خلفية ملونة + نص الخصم كبير + صورة المنتج + CTA', color: '#FF6B6B'},
+  {title: 'بوست إعلان منتج جديد', desc: 'صورة المنتج منتصف + تأثير جلو + نص "وصل حديثاً"', color: '#4ECDC4'},
+  {title: 'بوست نصيحة للعملاء', desc: 'خلفية بيضاء + أيقونات + نصائح مرقمة', color: '#45B7D1'},
+  {title: 'بوست تجربة عميل', desc: 'صورة العميل + اقتباس + نجوم التقييم', color: '#96CEB4'},
+  {title: 'بوست قبل وبعد', desc: 'تقسيم نصفين + صورتين + نص مقارنة', color: '#FFEAA7'},
+  {title: 'بوست موسمي/مناسباتي', desc: 'تصميم موسمي + هوية البراند + عرض خاص', color: '#DDA0DD'},
+];
+
+function openPostDesignGenerator() {
+  const ideas = postDesigns.sort(() => 0.5 - Math.random());
+  const html = `
+    <p style="font-size:13px;color:var(--brown3);margin-bottom:16px">أفكار تصميم بوستات احترافية جاهزة للتنفيذ</p>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      ${ideas.map(d => `<div style="padding:14px 16px;border-radius:12px;border-right:4px solid ${d.color};background:rgba(0,0,0,.02)">
+        <div style="font-size:13px;font-weight:800;color:var(--brown);margin-bottom:4px">${d.title}</div>
+        <div style="font-size:11px;color:var(--brown3)">${d.desc}</div>
+      </div>`).join('')}
+    </div>`;
+  showToolsModal('🎨 Post Design Ideas', html);
+}
+
+/* =====================================================
+   30 IDEAS GENERATOR — مولد 30 فكرة محتوى
+   ===================================================== */
+const contentIdeasByDomain = {
+  restaurant: [
+    'فيديو تحضير طبق شهير', 'تجربة عميل حقيقي', 'أفضل وجبة في المطعم',
+    'خلف الكواليس في المطبخ', 'عرض خصم اليوم', 'فيديو قبل وبعد الطبق',
+    'مسابقة تخمين الطبق', 'نصيحة من الشيف', 'Story عن أصل الوصفة',
+    'مقارنة بين وجبتين', 'فيديو تعبئة الأوردر', 'رد على أشهر سؤال',
+    'فيديو الزحمة في ساعة الذروة', 'عرض وجبة جديدة', 'شهادة عميل بالصوت',
+  ],
+  fashion: [
+    'تنسيق ملابس يومي', 'أفضل 3 قطع في المتجر', 'قبل وبعد اللبس',
+    'مقارنة بين ستايلين', 'عرض خصم موسمي', 'Try-On Challenge',
+    'كيف تنسق لون صعب', 'أسرار تنظيف الملابس', 'كومبو الأسبوع',
+    'فيديو Unboxing طلبية جديدة', 'مسابقة أفضل لوك', 'نصيحة موضة هذا الموسم',
+  ],
+  retail: [
+    'مراجعة منتج مفصلة', 'تجربة عميل', 'أكثر منتج مبيعاً',
+    'فتح صندوق المنتج Unboxing', 'عرض محدود 24 ساعة', 'مقارنة بين منتجين',
+    'كيفية استخدام المنتج', 'نصيحة قبل الشراء', 'قصة بداية المتجر',
+  ],
+  beauty: [
+    'تيوتوريال ماكياج سريع', 'روتين العناية الصباحي', 'مراجعة منتج جديد',
+    'قبل وبعد المكياج', 'أسرار البشرة النضرة', 'تحدي ماكياج طبيعي',
+    'أفضل 5 منتجات بأقل سعر', 'نصيحة يومية للعناية', 'ريلز تطبيق لون جديد',
+  ],
+  tech: [
+    'ريفيو تطبيق/منتج تقني', 'نصيحة تقنية لأصحاب المشاريع', 'مشكلة وحل سريع',
+    'مقارنة بين أداتين', 'كيف تستخدم AI في مشروعك', 'شرح ميزة مخفية',
+    'فيديو Demo للمنتج', 'أخطاء تقنية شائعة', 'نصيحة توفير وقت',
+  ],
+  services: [
+    'شهادة عميل راضٍ', 'فيديو تعريفي بالخدمة', 'نصيحة من الخبير',
+    'أشهر سؤال يسأله العملاء', 'يوم في عمل المتخصص', 'قصة نجاح عميل',
+    'أخطاء يقع فيها العملاء', 'كيف تختار الخدمة الصح', 'عرض استشارة مجانية',
+  ]
+};
+
+/* =====================================================
+   INIT
+   ===================================================== */
+window.addEventListener('load', () => {
+  // إخفاء كل الصفحات أولاً
+  document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
+  // لو المستخدم مسجّل دخول — روّحه للداشبورد مباشرة
+  try {
+    if (localStorage.getItem('soqly_loggedIn') === 'true') {
+      goPage('dashboard');
+      return;
+    }
+  } catch(e) {}
+  goPage('landing');
+});
+</script>
+</body>
+</html>
